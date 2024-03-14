@@ -1,5 +1,4 @@
-export function PopUser() {
-    return(
+export const PopUser = () => (
         <div
         className="header__pop-user-set pop-user-set"
         id="user-set-target"
@@ -15,4 +14,3 @@ export function PopUser() {
         </button>
       </div>
     )
-}

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-export function Card( { cardTheme, cardTitle, cardDate }) {
-    return (
+export const Card = ( { cardTheme, cardTitle, cardDate })=> (
         <div className="cards__item">
         <div className="cards__card card">
           <div className="card__group">
@@ -53,8 +52,7 @@ export function Card( { cardTheme, cardTitle, cardDate }) {
           </div>
         </div>
       </div>
-    )
-}
+)
 Card.propTypes = {
   cardTheme: PropTypes.string.isRequired,
   cardTitle: PropTypes.string.isRequired,

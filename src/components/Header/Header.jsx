@@ -1,5 +1,4 @@
-export function Header() {
-  return (
+export const Header= () => (
     <header className="header">
       <div className="container">
         <div className="header__block">
@@ -25,4 +24,3 @@ export function Header() {
       </div>
     </header>
   );
-}

@@ -1,5 +1,5 @@
-export function Calendar() {
-  return(
+export const Calendar= () => (
+ 
     <div className="pop-new-card__calendar calendar">
                     <p className="calendar__ttl subttl">Даты</p>
                     <div className="calendar__block">
@@ -112,5 +112,4 @@ export function Calendar() {
                       </div>
                     </div>
                   </div>
-  )
-}
+)

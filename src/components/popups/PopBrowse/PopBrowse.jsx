@@ -1,7 +1,6 @@
 import { Calendar } from "../../Calendar/Calendar";
 
-export function PopBrowse() {
-    return(
+export const PopBrowse = ()=> (
         <div className="pop-browse" id="popBrowse">
           <div className="pop-browse__container">
             <div className="pop-browse__block">
@@ -95,5 +94,4 @@ export function PopBrowse() {
             </div>
           </div>
         </div>
-    )
-}
+)
