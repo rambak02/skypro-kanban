@@ -6,7 +6,7 @@ export const Column = ({title, cards }) => (
           <p>{title}</p>
         </div>
         <div className="cards">
-            {cards.map((card)=> <Card key={card.Id} date={card.date} topic={card.topic} title={card.title} />)}
+            {cards.map((card)=> <Card key={card.id} date={card.date} topic={card.topic} title={card.title} />)}
         </div>
       </div>
 );
