@@ -25,9 +25,10 @@ function App() {
     setCards([...cards, newCard]);
   }
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+    return () => clearInterval(timer);
   }, []);
   return (
     <div>
