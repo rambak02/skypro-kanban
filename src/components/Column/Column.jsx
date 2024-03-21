@@ -1,16 +1,16 @@
 import { Card } from "../Card/Card"
 import PropTypes from 'prop-types';
-export const Column = ({columnTitle, cards }) => (
+export const Column = ({title, cards }) => (
         <div className="main__column">
         <div className="column__title">
-          <p>{columnTitle}</p>
+          <p>{title}</p>
         </div>
         <div className="cards">
-            {cards.map((card)=> <Card key={card.cardId} cardDate={card.cardDate} cardTheme={card.cardTheme} cardTitle={card.cardTitle} />)}
+            {cards.map((card)=> <Card key={card.cardId} date={card.date} topic={card.topic} title={card.title} />)}
         </div>
       </div>
 );
 Column.propTypes = {
-    columnTitle: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
   };

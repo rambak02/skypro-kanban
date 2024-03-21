@@ -1,4 +1,6 @@
-export const Header= () => (
+import PropTypes from 'prop-types';
+export function Header({ onClick, addCard }) {
+  return (
     <header className="header">
       <div className="container">
         <div className="header__block">
@@ -13,10 +15,10 @@ export const Header= () => (
             </a>
           </div>
           <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
-              <a href="#popNewCard">Создать новую задачу</a>
+            <button onClick = {addCard} className="header__btn-main-new _hover01" id="btnMainNew">
+              <a href="#">Создать новую задачу</a>
             </button>
-            <a href="#user-set-target" className="header__user _hover02">
+            <a onClick = {onClick} href="#user-set-target" className="header__user _hover02">
               Ivan Ivanov
             </a>
           </nav>
@@ -24,3 +26,8 @@ export const Header= () => (
       </div>
     </header>
   );
+}
+Header.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  addCard: PropTypes.func.isRequired
+}
