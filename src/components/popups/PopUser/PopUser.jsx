@@ -1,5 +1,7 @@
-export const PopUser = () => (
-        <div
+import PropTypes from 'prop-types'
+export function PopUser({isOpen}) {
+  return (
+  isOpen && (<div
         className="header__pop-user-set pop-user-set"
         id="user-set-target"
       >
@@ -12,5 +14,10 @@ export const PopUser = () => (
         <button type="button" className="_hover03">
           <a href="#popExit">Выйти</a>
         </button>
-      </div>
-    )
+      </div> )
+      )
+}
+PopUser.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  
+};
