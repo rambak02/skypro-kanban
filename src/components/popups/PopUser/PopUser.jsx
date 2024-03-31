@@ -1,10 +1,7 @@
-import PropTypes from 'prop-types'
-export function PopUser({isOpen}) {
-  return (
-  isOpen && (<div
-        className="header__pop-user-set pop-user-set"
-        id="user-set-target"
-      >
+import PropTypes from "prop-types";
+export const PopUser = ({ isOpen }) => (
+    isOpen && (
+      <div className="header__pop-user-set pop-user-set" id="user-set-target">
         <p className="pop-user-set__name">Ivan Ivanov</p>
         <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
         <div className="pop-user-set__theme">
@@ -14,10 +11,9 @@ export function PopUser({isOpen}) {
         <button type="button" className="_hover03">
           <a href="#popExit">Выйти</a>
         </button>
-      </div> )
-      )
-}
+      </div>
+    )
+  );
 PopUser.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  
 };
