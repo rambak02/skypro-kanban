@@ -1,51 +1,38 @@
 import PropTypes from "prop-types";
-export const Card = ({ topic, title, date }) => (
-  <div className="cards__item">
-    <div className="cards__card card">
-      <div className="card__group">
-        <div
-          className={
-            topic == "Research"
-              ? "card__theme _green"
-              : topic == "Copywriting"
-              ? " card__theme _purple"
-              : "card__theme _orange"
-          }
-        >
-          <p
-            className={
-              topic == "Research"
-                ? "_green"
-                : topic == "Copywriting"
-                ? "purple"
-                : "_orange"
-            }
-          >
-            {topic}
-          </p>
-        </div>
+import * as S from "./Card.styled";
+export const Card = ({ topic, title, date, topicColor }) => (
+ <S.CardItem>
+  <S.CardsCard>
+    <S.CardGroup>
+      <S.CardTheme $topicColor={topicColor}>
+        <S.TopicText>
+            {topic}         
+          </S.TopicText>
+        </S.CardTheme>
         <a href="#popBrowse" target="_self">
-          <div className="card__btn">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+          <S.CardBtn>
+          <S.CardBtnDetail> </S.CardBtnDetail>
+          <S.CardBtnDetail> </S.CardBtnDetail>
+          <S.CardBtnDetail> </S.CardBtnDetail>
+          </S.CardBtn>
         </a>
-      </div>
-      <div className="card__content">
+      </S.CardGroup>
+      <S.CardContent>
         <a href="" target="_blank">
-          <h3 className="card__title">{title}</h3>
+          <S.CardTitle>{title}</S.CardTitle>
         </a>
-        <div className="card__date">
-          <img src="/public/card_date.svg"  />
-          <p> {date}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        <S.CardDate>
+          <S.CardDateImg src="/public/card_date.svg"  /> 
+          <S.CardDateText>{date}</S.CardDateText>
+        </S.CardDate>
+      </S.CardContent>
+    </S.CardsCard>
+</S.CardItem> 
+
 );
 Card.propTypes = {
   topic: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  topicColor: PropTypes.string.isRequired
 };

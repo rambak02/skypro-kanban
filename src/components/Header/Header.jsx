@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
+import * as S from "./Header.styled";
 export const Header = ({ onClick, addCard }) => (
-  <header className="header">
-    <div className="container">
-      <div className="header__block">
+  <S.Header>
+    <S.Container>
+      <S.HeaderBlock>
         <div className="header__logo _show _light">
           <a href="" target="_self">
             <img src="/public/logo.png" alt="logo" />
@@ -13,7 +14,7 @@ export const Header = ({ onClick, addCard }) => (
             <img src="/public/logo_dark.png" alt="logo" />
           </a>
         </div>
-        <nav className="header__nav">
+        <S.HeaderNav>
           <button
             onClick={addCard}
             className="header__btn-main-new _hover01"
@@ -28,10 +29,10 @@ export const Header = ({ onClick, addCard }) => (
           >
             Ivan Ivanov
           </a>
-        </nav>
-      </div>
-    </div>
-  </header>
+        </S.HeaderNav>
+        </S.HeaderBlock>
+    </S.Container>
+  </S.Header>
 );
 Header.propTypes = {
   onClick: PropTypes.func.isRequired,
