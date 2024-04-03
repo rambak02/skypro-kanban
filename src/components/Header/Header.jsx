@@ -1,39 +1,36 @@
 import PropTypes from "prop-types";
-export const Header = ({ onClick, addCard }) => (
-  <header className="header">
-    <div className="container">
-      <div className="header__block">
-        <div className="header__logo _show _light">
+import * as S from "./Header.styled";
+export const Header = ({ onClick, addCard, show }) => (
+  <S.Header>
+    <S.Container>
+      <S.HeaderBlock>
+        <S.HeaderLogo $show={show}>
           <a href="" target="_self">
-            <img src="/public/logo.png" alt="logo" />
+            <S.HeaderLogoImg src="/public/logo.png" alt="logo" />
           </a>
-        </div>
-        <div className="header__logo _dark">
+        </S.HeaderLogo>
+        <S.HeaderLogo>
           <a href="" target="_self">
-            <img src="/public/logo_dark.png" alt="logo" />
+            <S.HeaderLogoImg src="/public/logo_dark.png" alt="logo" />
           </a>
-        </div>
-        <nav className="header__nav">
-          <button
-            onClick={addCard}
-            className="header__btn-main-new _hover01"
-            id="btnMainNew"
-          >
-            <a href="#">Создать новую задачу</a>
-          </button>
-          <a
+        </S.HeaderLogo>
+        <S.HeaderNav>
+          <S.HeaderBtnMainNew onClick={addCard} id="btnMainNew">
+            <S.HeaderLink href="#">Создать новую задачу</S.HeaderLink>
+          </S.HeaderBtnMainNew>
+          <S.HeaderUserLink
             onClick={onClick}
             href="#user-set-target"
-            className="header__user _hover02"
           >
             Ivan Ivanov
-          </a>
-        </nav>
-      </div>
-    </div>
-  </header>
+          </S.HeaderUserLink>
+        </S.HeaderNav>
+      </S.HeaderBlock>
+    </S.Container>
+  </S.Header>
 );
 Header.propTypes = {
   onClick: PropTypes.func.isRequired,
   addCard: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
 };
