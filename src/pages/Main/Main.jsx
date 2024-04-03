@@ -3,10 +3,10 @@ import { columnList } from "../../data";
 import PropTypes from "prop-types";
 import * as S from "./Main.styled";
 export const Main = ({ cardList }) => (
-  <main className="main">
+  <S.Main>
     <S.Container>
-      <div className="main__block">
-        <div className="main__content">
+      <S.MainBlock>
+        <S.MainContent>
           {columnList.map((status) => (
             <Column
               key={status}
@@ -14,10 +14,10 @@ export const Main = ({ cardList }) => (
               cards={cardList.filter((card) => card.status === status)}
             />
           ))}
-        </div>
-      </div>
+        </S.MainContent>
+      </S.MainBlock>
     </S.Container>
-  </main>
+  </S.Main>
 );
 Main.propTypes = {
   cardList: PropTypes.array.isRequired,

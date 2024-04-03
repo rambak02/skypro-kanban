@@ -6,8 +6,10 @@ import { PopNewCard } from "./components/popups/PopNewCard/PopNewCard";
 import { PopBrowse } from "./components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "./components/popups/PopUser/PopUser";
 import { cardList } from "./data";
+import { GlobalStyle } from "./Global.styled";
 
 function App() {
+  const show = true;
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [cards, setCards] = useState(cardList);
@@ -31,9 +33,10 @@ function App() {
     return () => clearInterval(timer);
   }, []);
   return (
-    <div>
+    <>
+    <GlobalStyle/>
       <div className="wrapper">
-        <Header onClick={togglePopUser} addCard={addCard} />
+        <Header onClick={togglePopUser} addCard={addCard} show={show} />
         {isLoading ? (
           <div>Данные загружаются...</div>
         ) : (
@@ -46,7 +49,7 @@ function App() {
         )}
       </div>
       <script src="js/script.js"></script>
-    </div>
+    </>
   );
 }
 
