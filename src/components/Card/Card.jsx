@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import * as S from "./Card.styled";
-export const Card = ({ topic, title, date, topicColor }) => (
+import { Link } from "react-router-dom";
+export const Card = ({ topic, title, date, topicColor, id }) => {
+  const cardLink = "/card/" + id
+  return (
+  
  <S.CardItem>
   <S.CardsCard>
     <S.CardGroup>
@@ -18,9 +22,9 @@ export const Card = ({ topic, title, date, topicColor }) => (
         </a>
       </S.CardGroup>
       <S.CardContent>
-        <a href="" target="_blank">
+      <Link to={cardLink}>
           <S.CardTitle>{title}</S.CardTitle>
-        </a>
+          </Link>
         <S.CardDate>
           <S.CardDateImg src="/public/card_date.svg"  /> 
           <S.CardDateText>{date}</S.CardDateText>
@@ -30,9 +34,11 @@ export const Card = ({ topic, title, date, topicColor }) => (
 </S.CardItem> 
 
 );
+}
 Card.propTypes = {
   topic: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  topicColor: PropTypes.string.isRequired
+  topicColor: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
 };

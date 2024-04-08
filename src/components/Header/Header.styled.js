@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { after, hover01, hover02 } from "../Common/Common.styled";
+import { after, hover01, hover02 } from "../../Styles/Common.styled";
 export const Header = styled.header`
   width: 100%;
   margin: 0 auto;

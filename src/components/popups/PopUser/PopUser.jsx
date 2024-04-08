@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 export const PopUser = ({ isOpen }) => (
     isOpen && (
       <div className="header__pop-user-set pop-user-set" id="user-set-target">
@@ -8,9 +9,11 @@ export const PopUser = ({ isOpen }) => (
           <p>Темная тема</p>
           <input type="checkbox" className="checkbox" name="checkbox" />
         </div>
+        <Link to='/login'>
         <button type="button" className="_hover03">
-          <a href="#popExit">Выйти</a>
+          Выйти
         </button>
+        </Link>
       </div>
     )
   );
