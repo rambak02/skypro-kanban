@@ -6,8 +6,9 @@ import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "../../components/popups/PopUser/PopUser";
 import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
+import PropTypes from "prop-types";
 
-export const Main = () => {
+export const Main = ({userExit}) => {
   const show = true;
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ export const Main = () => {
       <Header onClick={togglePopUser} addCard={addCard} show={show} />
       <PopNewCard />
       <PopBrowse />
-      <PopUser isOpen={isOpen} />
+      <PopUser isOpen={isOpen} userExit={userExit}/>
       <S.Main>
         <S.Container>
           <S.MainBlock>
@@ -60,4 +61,7 @@ export const Main = () => {
     )}
     </>
   );
+};
+Main.propTypes = {
+  userExit: PropTypes.func.isRequired,
 };

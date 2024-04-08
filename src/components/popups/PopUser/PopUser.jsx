@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-export const PopUser = ({ isOpen }) => (
+export const PopUser = ({ isOpen, userExit }) => {
+  return (
     isOpen && (
       <div className="header__pop-user-set pop-user-set" id="user-set-target">
         <p className="pop-user-set__name">Ivan Ivanov</p>
@@ -10,13 +11,14 @@ export const PopUser = ({ isOpen }) => (
           <input type="checkbox" className="checkbox" name="checkbox" />
         </div>
         <Link to='/login'>
-        <button type="button" className="_hover03">
+        <button onClick={userExit}  type="button" className="_hover03">
           Выйти
         </button>
         </Link>
       </div>
     )
-  );
+  )}
 PopUser.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  userExit: PropTypes.func.isRequired,
 };
