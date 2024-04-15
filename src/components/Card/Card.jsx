@@ -2,6 +2,15 @@ import PropTypes from "prop-types";
 import * as S from "./Card.styled";
 import { Link } from "react-router-dom";
 export const Card = ({ topic, title, date, _id }) => {
+  //изменение формата дат
+  const originalDate = new Date(date)
+  const formattedDate = originalDate.toLocaleDateString("ru-RU", {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit"
+    });
+    
+
   const cardLink = "/card/" + _id
   return (
   
@@ -27,7 +36,7 @@ export const Card = ({ topic, title, date, _id }) => {
           </Link>
         <S.CardDate>
           <S.CardDateImg src="/public/card_date.svg"  /> 
-          <S.CardDateText>{date}</S.CardDateText>
+          <S.CardDateText>{formattedDate}</S.CardDateText>
         </S.CardDate>
       </S.CardContent>
     </S.CardsCard>

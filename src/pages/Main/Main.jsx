@@ -15,6 +15,7 @@ export const Main = ({userExit}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cards, setCards] = useState("");
 
+  //получение задач из api
   useEffect(() => {
     async function fetchCards() {
       try {
