@@ -9,10 +9,12 @@ import PrivateRoute from './PrivateRoute';
 import { useState } from 'react';
 
 export const AppRoutes = () => {
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(true)
+    //Выход пользователя 
     const userExit= () => {
         setIsAuth(false)
       }
+    //Авторизация пользователя
     const userLogin = () => {
         setIsAuth(true)
     } 

@@ -7,18 +7,38 @@ import { PopUser } from "../../components/popups/PopUser/PopUser";
 import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
 import PropTypes from "prop-types";
+import { getCards } from "../../api";
 
 export const Main = ({userExit}) => {
   const show = true;
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [cards, setCards] = useState(cardList);
+  const [cards, setCards] = useState("");
+
+  useEffect(() => {
+    async function fetchCards() {
+      try {
+        const cards = await getCards()
+        setCards(cards)
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading ('Не удалось загрузить задачи, попробуйте позже')
+        
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchCards()
+  }, [])
+  // Закрытие и открытие popUser
   const togglePopUser = () => {
     setIsOpen((prevState) => !prevState);
   };
+  // Добавление новой задачи
   function addCard() {
     const newCard = {
-      id: cardList.length + 1,
+      _id: cardList.length + 1,
       title: "Название задачи",
       topic: "Web Design",
       date: "30.10.23",
@@ -26,6 +46,7 @@ export const Main = ({userExit}) => {
     };
     setCards([...cards, newCard]);
   }
+  // 2 секундная загрузка страницы
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -50,7 +71,7 @@ export const Main = ({userExit}) => {
                 <Column
                   key={status}
                   title={status}
-                  cards={cardList.filter((card) => card.status === status)}
+                  cards={cards.tasks.filter((card) => card.status === status)}
                 />
               ))}
             </S.MainContent>
