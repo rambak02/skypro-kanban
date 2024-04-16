@@ -12,6 +12,7 @@ import { getCards } from "../../api";
 export const Main = ({userExit}) => {
   const show = true;
   const [isLoading, setIsLoading] = useState(true);
+  const [getCardsError, setGetCardsError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [cards, setCards] = useState("");
 
@@ -23,7 +24,7 @@ export const Main = ({userExit}) => {
         setCards(cards)
         setIsLoading(false);
       } catch (error) {
-        setIsLoading ('Не удалось загрузить задачи, попробуйте позже')
+       setGetCardsError("Не удалось загрузить данные, попробуйте позже...")
         
       } finally {
         setIsLoading(false);
@@ -47,17 +48,11 @@ export const Main = ({userExit}) => {
     };
     setCards([...cards, newCard]);
   }
-  // 2 секундная загрузка страницы
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearInterval(timer);
-  }, []);
+ 
   return (
     <>
-    {isLoading ? (
-      <div>Данные загружаются...</div>
+    {isLoading ?   <div>Данные загружаются...</div> : getCardsError ? (
+    <div>{getCardsError}</div>
     ) : (
       <>
       <Header onClick={togglePopUser} addCard={addCard} show={show} />
