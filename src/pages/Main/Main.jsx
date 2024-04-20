@@ -9,7 +9,7 @@ import { Header } from "../../components/Header/Header";
 import PropTypes from "prop-types";
 import { getCards } from "../../api";
 
-export const Main = ({userExit}) => {
+export const Main = ({userLogout, user}) => {
   const show = true;
   const [isLoading, setIsLoading] = useState(true);
   const [getCardsError, setGetCardsError] = useState(null);
@@ -18,21 +18,14 @@ export const Main = ({userExit}) => {
 
   //получение задач из api
   useEffect(() => {
-    async function fetchCards() {
-      try {
-        const cards = await getCards()
-        setCards(cards)
-        setIsLoading(false);
-      } catch (error) {
-       setGetCardsError("Не удалось загрузить данные, попробуйте позже...")
-        
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  getCards({token: user.token}).then((cards)=> {
+    setCards(cards)
+    setIsLoading(false)
+  }).catch((error)=>{setGetCardsError(error.message)}).finally(()=> {
+    setIsLoading(false)
+  })
+  }, [user])
 
-    fetchCards()
-  }, [])
   // Закрытие и открытие popUser
   const togglePopUser = () => {
     setIsOpen((prevState) => !prevState);
@@ -48,6 +41,8 @@ export const Main = ({userExit}) => {
     };
     setCards([...cards, newCard]);
   }
+
+ 
  
   return (
     <>
@@ -58,7 +53,7 @@ export const Main = ({userExit}) => {
       <Header onClick={togglePopUser} addCard={addCard} show={show} />
       <PopNewCard />
       <PopBrowse />
-      <PopUser isOpen={isOpen} userExit={userExit}/>
+      <PopUser isOpen={isOpen} userLogout={userLogout}/>
       <S.Main>
         <S.Container>
           <S.MainBlock>
@@ -80,5 +75,5 @@ export const Main = ({userExit}) => {
   );
 };
 Main.propTypes = {
-  userExit: PropTypes.func.isRequired,
+  userLogout: PropTypes.func.isRequired,
 };

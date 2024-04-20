@@ -1,27 +1,78 @@
- import { Link } from "react-router-dom"
- import PropTypes from "prop-types";
- export const LoginPage = ({userLogin}) => (
-  <div className="wrapper">
-  <div className="container-signin">
-      <div className="modal">
-  <div className="modal__block">
-    <div className="modal__ttl">
-      <h2>Вход</h2>
+import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { constRoutes } from "../../paths";
+import { loginUser } from "../../api";
+export const LoginPage = ({ userLogin }) => {
+  const navigate = useNavigate
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
+
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    if (login === '' && password === '') {
+      setError('Укажите email и пароль')
+    } else if (login === '') {
+      setError('Укажите email')
+    } else if (password === '') {
+      setError('Укажите пароль')
+    } else {
+      try {
+        const response = await loginUser(login, password)
+        console.log( response.user)
+        userLogin(response.user)
+        navigate('/', { replace: true })
+        localStorage.setItem('user', login)
+      } catch (error) {
+        setError(error.message)
+      }
+    }
+            }
+ 
+  return (
+    <div className="wrapper">
+      <div className="container-signin">
+        <div className="modal">
+          <div className="modal__block">
+            <div className="modal__ttl">
+              <h2>Вход</h2>
+            </div>
+            <form className="modal__form-login" id="formLogIn" action="#">
+              <input
+                className="modal__input"
+                type="text"
+                value={login}
+                onChange={(e)=> setLogin(e.target.value)}
+                id="formlogin"
+                placeholder="Эл. почта"
+              />
+              <input
+                className="modal__input"
+                type="password"
+                value = {password}
+                onChange={(e)=> setPassword(e.target.value)}
+                placeholder="Пароль"
+              />
+              { error && <div>{error} </div> }
+              <button
+                className="modal__btn-enter _hover01"
+                id="btnEnter"
+                onClick={handleUserLogin}
+              >
+               Войти
+              </button>
+              <div className="modal__form-group">
+                <p>Нужно зарегистрироваться?</p>
+                <Link to={constRoutes.REGISTER}>Регистрируйтесь здесь</Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <form className="modal__form-login" id="formLogIn" action="#">
-      <input className="modal__input" type="text" name="login" id="formlogin" placeholder="Эл. почта"/>
-      <input className="modal__input" type="password" name="password" id="formpassword" placeholder="Пароль"/>
-      <button className="modal__btn-enter _hover01" id="btnEnter" onClick={userLogin}><Link to= "/">Войти</Link></button>
-      <div className="modal__form-group">
-        <p>Нужно зарегистрироваться?</p>
-        <Link to='/register'>Регистрируйтесь здесь</Link>
-      </div>
-    </form>
-  </div>
-      </div>
-  </div>
-</div>
-    )
-   LoginPage.propTypes = {
-      userLogin: PropTypes.func.isRequired
-    };
+  );
+};
+LoginPage.propTypes = {
+  userLogin: PropTypes.func.isRequired,
+};
