@@ -4,10 +4,10 @@ import { useState } from "react";
 import { constRoutes } from "../../paths";
 import { loginUser } from "../../api";
 export const LoginPage = ({ userLogin }) => {
-  const navigate = useNavigate
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
+  const navigate = useNavigate
 
   const handleUserLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +23,6 @@ export const LoginPage = ({ userLogin }) => {
         console.log( response.user)
         userLogin(response.user)
         navigate('/', { replace: true })
-        localStorage.setItem('user', login)
       } catch (error) {
         setError(error.message)
       }

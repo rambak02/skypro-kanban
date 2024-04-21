@@ -46,11 +46,12 @@ export const Main = ({userLogout, user}) => {
  
   return (
     <>
+     <Header onClick={togglePopUser} addCard={addCard} show={show} />
     {isLoading ?   <div>Данные загружаются...</div> : getCardsError ? (
     <div>{getCardsError}</div>
     ) : (
       <>
-      <Header onClick={togglePopUser} addCard={addCard} show={show} />
+     
       <PopNewCard />
       <PopBrowse />
       <PopUser isOpen={isOpen} userLogout={userLogout}/>

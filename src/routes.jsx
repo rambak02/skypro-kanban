@@ -10,13 +10,15 @@ import { useState } from 'react';
 
 export const AppRoutes = () => {
     // const [isAuth, setIsAuth] = useState(true)
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 const navigate = useNavigate();
 function userLogin(newUser) {
+  localStorage.setItem('user', JSON.stringify(newUser))
   setUser(newUser)
   navigate(constRoutes.HOME)
 }
 function userLogout() {
+  localStorage.removeItem("user");
   setUser({})
   navigate(constRoutes.LOGIN)
 }
@@ -24,7 +26,7 @@ function userLogout() {
     return (
         <>
         <Routes>
-        <Route element={<PrivateRoute user={user} />}>
+        <Route element={<PrivateRoute/>}>
          <Route path={constRoutes.HOME} element={<Main userLogout={userLogout} user={user}/>}/>
          <Route path={constRoutes.CARD} element={<CardPage/>}/>
          </Route>
