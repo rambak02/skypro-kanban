@@ -34,14 +34,6 @@ export const Main = ({userLogout, user}) => {
   };
   // Добавление новой задачи
   function addCard() {
-    const newCard = {
-      _id: cardList.length + 1,
-      title: "Название задачи",
-      topic: "Web Design",
-      date: "30.10.23",
-      status: "Без статуса",
-    };
-    setCards([...cards, newCard]);
   }
 
  
