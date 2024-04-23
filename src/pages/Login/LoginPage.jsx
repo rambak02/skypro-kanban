@@ -32,6 +32,7 @@ export const LoginPage = ({ userLogin }) => {
                 placeholder="Эл. почта"
               />
               <S.Input
+              autoComplete="on"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

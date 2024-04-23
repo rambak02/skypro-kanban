@@ -11,7 +11,7 @@ import { authUser } from './api';
 
 export const AppRoutes = () => {
     // const [isAuth, setIsAuth] = useState(true)
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
 const navigate = useNavigate();
 function userLogin(newUser) {
   localStorage.setItem('user', JSON.stringify(newUser))

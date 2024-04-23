@@ -71,4 +71,5 @@ export const Main = ({userLogout, user}) => {
 };
 Main.propTypes = {
   userLogout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };

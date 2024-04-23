@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegistration } from "../hooks";
@@ -43,6 +44,7 @@ export const RegisterPage = ({ authUser, userLogin, navigate }) => {
                 placeholder="Логин"
               />
               <S.Input
+              autoComplete="on"
                 type="password"
                 name="password"
                 value={password}
@@ -69,4 +71,10 @@ export const RegisterPage = ({ authUser, userLogin, navigate }) => {
       </S.ContainerSignUp>
     </S.Wrapper>
   );
+};
+
+RegisterPage.propTypes = {
+  authUser: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired
 };

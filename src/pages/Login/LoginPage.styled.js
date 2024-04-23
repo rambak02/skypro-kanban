@@ -26,6 +26,10 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+
+@media screen and (max-width: 375px) {
+    background-color: #FFFFFF;
+}
 `;
 
 export const ModalBlock = styled.div`
@@ -38,6 +42,15 @@ padding: 50px 60px;
 border-radius: 10px;
 border: 0.7px solid #D4DBE5;
 box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+
+@media screen and (max-width: 375px) {
+    max-width: 368px;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: none;
+    border: none;
+    box-shadow: none;
+}
 `;
 
 export const ModalTtl = styled.div`
@@ -107,6 +120,10 @@ letter-spacing: -0.14px;
 color: #FFFFFF;
 
 ${hover01}
+
+@media screen and (max-width: 375px) {
+    height: 40px;
+}
 `;
 
 export const FormGroup = styled.div`
