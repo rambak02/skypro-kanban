@@ -4,57 +4,56 @@ import { useState } from "react";
 import { constRoutes } from "../../paths";
 import { useLogin } from "../hooks";
 import { loginUser } from "../../api";
+import * as S from "./LoginPage.styled";
 export const LoginPage = ({ userLogin }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate
-  const {handleLogin, error} = useLogin(loginUser, userLogin, navigate)
+  const navigate = useNavigate;
+  const { handleLogin, error } = useLogin(loginUser, userLogin, navigate);
   const handleUserLogin = async (e) => {
     e.preventDefault();
-     handleLogin(login, password)
-            }
- 
+    handleLogin(login, password);
+  };
+
   return (
-    <div className="wrapper">
-      <div className="container-signin">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
-              <h2>Вход</h2>
-            </div>
-            <form className="modal__form-login" id="formLogIn" action="#">
-              <input
-                className="modal__input"
+    <S.Wrapper>
+      <S.ContainerSignin>
+        <S.Modal>
+          <S.ModalBlock>
+            <S.ModalTtl>
+              <S.ModalTtl>Вход</S.ModalTtl>
+            </S.ModalTtl>
+            <S.FormLogin id="formLogIn" action="#">
+              <S.Input
                 type="text"
                 value={login}
-                onChange={(e)=> setLogin(e.target.value)}
+                onChange={(e) => setLogin(e.target.value)}
                 id="formlogin"
                 placeholder="Эл. почта"
               />
-              <input
-                className="modal__input"
+              <S.Input
                 type="password"
-                value = {password}
-                onChange={(e)=> setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Пароль"
               />
-              { error && <div>{error} </div> }
-              <button
-                className="modal__btn-enter _hover01"
-                id="btnEnter"
-                onClick={handleUserLogin}
-              >
-               Войти
-              </button>
-              <div className="modal__form-group">
-                <p>Нужно зарегистрироваться?</p>
-                <Link to={constRoutes.REGISTER}>Регистрируйтесь здесь</Link>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+              {error && <div>{error} </div>}
+              <S.ButtonEnter id="btnEnter" onClick={handleUserLogin}>
+                Войти
+              </S.ButtonEnter>
+              <S.FormGroup>
+                <S.FormGroupText>Нужно зарегистрироваться?</S.FormGroupText>
+
+                <Link to={constRoutes.REGISTER}>
+                  {" "}
+                  <S.FormGroupLink>Регистрируйтесь здесь </S.FormGroupLink>
+                </Link>
+              </S.FormGroup>
+            </S.FormLogin>
+          </S.ModalBlock>
+        </S.Modal>
+      </S.ContainerSignin>
+    </S.Wrapper>
   );
 };
 LoginPage.propTypes = {

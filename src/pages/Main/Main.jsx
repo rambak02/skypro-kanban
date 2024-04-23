@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Column } from "../../components/Column/Column";
-import { cardList, columnList } from "../../data";
+import { columnList } from "../../data";
 import { PopNewCard } from "../../components/popups/PopNewCard/PopNewCard";
 import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "../../components/popups/PopUser/PopUser";

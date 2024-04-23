@@ -1,66 +1,72 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegistration } from "../hooks";
+import * as S from "./RegisterPage.styled";
 export const RegisterPage = ({ authUser, userLogin, navigate }) => {
-  const { handleRegister, error} = useRegistration(authUser, userLogin, navigate)
+  const { handleRegister, error } = useRegistration(
+    authUser,
+    userLogin,
+    navigate
+  );
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    handleRegister(name, login, password)
-  }
+    handleRegister(name, login, password);
+  };
 
   return (
-  <div className="wrapper">
-    <div className="container-signup">
-      <div className="modal">
-        <div className="modal__block">
-          <div className="modal__ttl">
-            <h2>Регистрация</h2>
-          </div>
-          <form className="modal__form-login" id="formLogUp" action="#">
-            <input
-              className="modal__input first-name"
-              type="text"
-              value ={name}
-              name="first-name"
-              id="first-name"
-              onChange={(e)=> setName(e.target.value)}
-              placeholder="Имя"
-            />
-            <input
-              className="modal__input login"
-              type="text"
-              name="login"
-              value={login}
-              id="loginReg"
-              onChange={(e)=> setLogin(e.target.value)}
-              placeholder="Логин"
-            />
-            <input
-              className="modal__input password-first"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e)=> setPassword(e.target.value)}
-              id="passwordFirst"
-              placeholder="Пароль"
-            />
-           { error && <div>{error} </div> }
-            <button  onClick = {onSubmitForm} className="modal__btn-signup-ent _hover01" id="SignUpEnter" >
-              Зарегистрироваться
-            </button>
-            <div className="modal__form-group">
-              <p>
-                Уже есть аккаунт? <Link to = "/login">Войдите здесь</Link>
-              </p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-)
-}
+    <S.Wrapper>
+      <S.ContainerSignUp>
+        <S.Modal>
+          <S.ModalBlock>
+            <S.ModalBlockTtl>
+              <S.ModalBlockTtlH2>Регистрация</S.ModalBlockTtlH2>
+            </S.ModalBlockTtl>
+            <S.FormLogin id="formLogUp" action="#">
+              <S.Input
+                type="text"
+                value={name}
+                name="first-name"
+                id="first-name"
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Имя"
+              />
+              <S.Input
+                type="text"
+                name="login"
+                value={login}
+                id="loginReg"
+                onChange={(e) => setLogin(e.target.value)}
+                placeholder="Логин"
+              />
+              <S.Input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                id="passwordFirst"
+                placeholder="Пароль"
+              />
+              {error && <div>{error} </div>}
+              <S.ButtonSignupEnt onClick={onSubmitForm} id="SignUpEnter">
+                Зарегистрироваться
+              </S.ButtonSignupEnt>
+              <S.FormGroup>
+                <S.FormGroupText>
+                  Уже есть аккаунт?{" "}
+                  <Link to="/login">
+                    {" "}
+                    <S.FormGroupLink>Войдите здесь </S.FormGroupLink>
+                  </Link>
+                </S.FormGroupText>
+              </S.FormGroup>
+            </S.FormLogin>
+          </S.ModalBlock>
+        </S.Modal>
+      </S.ContainerSignUp>
+    </S.Wrapper>
+  );
+};
