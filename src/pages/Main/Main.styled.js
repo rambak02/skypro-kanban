@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
+min-height: calc(100vh - 70px) ;
   width: 100%;
   background-color: #eaeef6;
 `;
@@ -30,6 +31,7 @@ export const MainBlock = styled.div`
 `;
 
 export const MainContent = styled.div`
+
   width: 100%;
   display: flex;
 

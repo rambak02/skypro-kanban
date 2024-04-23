@@ -1,12 +1,10 @@
-import PropTypes from "prop-types";
 import { Navigate, Outlet } from "react-router-dom";
 
-function PrivateRoute({ isAuth }) {
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+function PrivateRoute() {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  return user ? <Outlet /> : <Navigate to="/login"  replace/>;
 }
 
 export default PrivateRoute;
-
-PrivateRoute.propTypes = {
-    isAuth: PropTypes.bool.isRequired
-  };

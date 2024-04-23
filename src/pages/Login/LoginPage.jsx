@@ -1,27 +1,62 @@
- import { Link } from "react-router-dom"
- import PropTypes from "prop-types";
- export const LoginPage = ({userLogin}) => (
-  <div className="wrapper">
-  <div className="container-signin">
-      <div className="modal">
-  <div className="modal__block">
-    <div className="modal__ttl">
-      <h2>Вход</h2>
-    </div>
-    <form className="modal__form-login" id="formLogIn" action="#">
-      <input className="modal__input" type="text" name="login" id="formlogin" placeholder="Эл. почта"/>
-      <input className="modal__input" type="password" name="password" id="formpassword" placeholder="Пароль"/>
-      <button className="modal__btn-enter _hover01" id="btnEnter" onClick={userLogin}><Link to= "/">Войти</Link></button>
-      <div className="modal__form-group">
-        <p>Нужно зарегистрироваться?</p>
-        <Link to='/register'>Регистрируйтесь здесь</Link>
-      </div>
-    </form>
-  </div>
-      </div>
-  </div>
-</div>
-    )
-   LoginPage.propTypes = {
-      userLogin: PropTypes.func.isRequired
-    };
+import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { constRoutes } from "../../paths";
+import { useLogin } from "../hooks";
+import { loginUser } from "../../api";
+import * as S from "./LoginPage.styled";
+export const LoginPage = ({ userLogin }) => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate;
+  const { handleLogin, error } = useLogin(loginUser, userLogin, navigate);
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    handleLogin(login, password);
+  };
+
+  return (
+    <S.Wrapper>
+      <S.ContainerSignin>
+        <S.Modal>
+          <S.ModalBlock>
+            <S.ModalTtl>
+              <S.ModalTtl>Вход</S.ModalTtl>
+            </S.ModalTtl>
+            <S.FormLogin id="formLogIn" action="#">
+              <S.Input
+                type="text"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+                id="formlogin"
+                placeholder="Эл. почта"
+              />
+              <S.Input
+              autoComplete="on"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Пароль"
+              />
+              {error && <div>{error} </div>}
+              <S.ButtonEnter id="btnEnter" onClick={handleUserLogin}>
+                Войти
+              </S.ButtonEnter>
+              <S.FormGroup>
+                <S.FormGroupText>Нужно зарегистрироваться?</S.FormGroupText>
+
+                <Link to={constRoutes.REGISTER}>
+                  {" "}
+                  <S.FormGroupLink>Регистрируйтесь здесь </S.FormGroupLink>
+                </Link>
+              </S.FormGroup>
+            </S.FormLogin>
+          </S.ModalBlock>
+        </S.Modal>
+      </S.ContainerSignin>
+    </S.Wrapper>
+  );
+};
+LoginPage.propTypes = {
+  userLogin: PropTypes.func.isRequired,
+};

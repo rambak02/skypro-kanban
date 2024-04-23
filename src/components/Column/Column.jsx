@@ -10,12 +10,11 @@ export const Column = ({ title, cards }) => (
     <S.Cards>
       {cards.map((card) => (
         <Card
-        id={card.id}
-          key={card.id}
+        _id={card._id}
+          key={card._id}
           date={card.date}
           topic={card.topic}
           title={card.title}
-          topicColor={card.topicColor}
         />
       ))}
     </S.Cards>

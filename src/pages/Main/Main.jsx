@@ -1,47 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Column } from "../../components/Column/Column";
-import { cardList, columnList } from "../../data";
+import { columnList } from "../../data";
 import { PopNewCard } from "../../components/popups/PopNewCard/PopNewCard";
 import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "../../components/popups/PopUser/PopUser";
 import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
 import PropTypes from "prop-types";
+import { useFetchCards } from "../hooks";
 
-export const Main = ({userExit}) => {
+export const Main = ({userLogout, user}) => {
   const show = true;
-  const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [cards, setCards] = useState(cardList);
+  const { cards, isLoading, getCardsError} = useFetchCards(user)
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [getCardsError, setGetCardsError] = useState(null);
+  // const [cards, setCards] = useState("");
+
+
+  //получение задач из api
+  // useEffect(() => {
+  // getCards({token: user.token}).then((cards)=> {
+  //   setCards(cards)
+  //   setIsLoading(false)
+  // }).catch((error)=>{setGetCardsError(error.message)}).finally(()=> {
+  //   setIsLoading(false)
+  // })
+  // }, [user])
+
+  // Закрытие и открытие popUser
   const togglePopUser = () => {
     setIsOpen((prevState) => !prevState);
   };
+  // Добавление новой задачи
   function addCard() {
-    const newCard = {
-      id: cardList.length + 1,
-      title: "Название задачи",
-      topic: "Web Design",
-      date: "30.10.23",
-      status: "Без статуса",
-    };
-    setCards([...cards, newCard]);
   }
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearInterval(timer);
-  }, []);
+
+ 
+ 
   return (
     <>
-    {isLoading ? (
-      <div>Данные загружаются...</div>
+     <Header onClick={togglePopUser} addCard={addCard} show={show} />
+    {isLoading ?   <div>Данные загружаются...</div> : getCardsError ? (
+    <div>{getCardsError}</div>
     ) : (
       <>
-      <Header onClick={togglePopUser} addCard={addCard} show={show} />
+     
       <PopNewCard />
       <PopBrowse />
-      <PopUser isOpen={isOpen} userExit={userExit}/>
+      <PopUser isOpen={isOpen} userLogout={userLogout}/>
       <S.Main>
         <S.Container>
           <S.MainBlock>
@@ -50,7 +57,7 @@ export const Main = ({userExit}) => {
                 <Column
                   key={status}
                   title={status}
-                  cards={cardList.filter((card) => card.status === status)}
+                  cards={cards.tasks.filter((card) => card.status === status)}
                 />
               ))}
             </S.MainContent>
@@ -63,5 +70,6 @@ export const Main = ({userExit}) => {
   );
 };
 Main.propTypes = {
-  userExit: PropTypes.func.isRequired,
+  userLogout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
