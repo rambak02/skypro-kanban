@@ -1,33 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { authUser } from "../../api";
-export const RegisterPage = ({ userLogin }) => {
-  const navigate = useNavigate()
+import { Link } from "react-router-dom";
+import { useRegistration } from "../hooks";
+export const RegisterPage = ({ authUser, userLogin, navigate }) => {
+  const { handleRegister, error} = useRegistration(authUser, userLogin, navigate)
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
   const [name, setName] = useState("")
-  
-  const handleRegister = async (e) => {
+
+  const onSubmitForm = async (e) => {
     e.preventDefault();
-    if (login === '' && password === '' && name === "") {
-      setError('Укажите имя, логин и пароль')
-    } else if (login === '') {
-      setError('Укажите login')
-    } else if (password === '') {
-      setError('Укажите пароль')
-    } else if (name === "") {
-      setError('Укажите имя')
-    } else {
-      try {
-        const response = await authUser(name, login, password)
-        console.log(response.user)
-        userLogin(response.user)
-        navigate('/login', { replace: true })
-      } catch (error) {
-        setError(error.message)
-      }
-    }
+    handleRegister(name, login, password)
   }
 
   return (
@@ -67,7 +49,7 @@ export const RegisterPage = ({ userLogin }) => {
               placeholder="Пароль"
             />
            { error && <div>{error} </div> }
-            <button  onClick = {handleRegister} className="modal__btn-signup-ent _hover01" id="SignUpEnter" >
+            <button  onClick = {onSubmitForm} className="modal__btn-signup-ent _hover01" id="SignUpEnter" >
               Зарегистрироваться
             </button>
             <div className="modal__form-group">

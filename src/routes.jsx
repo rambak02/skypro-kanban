@@ -7,6 +7,7 @@ import { constRoutes } from './paths';
 import { CardPage } from './pages/CardPage/CardPage';
 import PrivateRoute from './PrivateRoute';
 import { useState } from 'react';
+import { authUser } from './api';
 
 export const AppRoutes = () => {
     // const [isAuth, setIsAuth] = useState(true)
@@ -30,7 +31,7 @@ function userLogout() {
          <Route path={constRoutes.HOME} element={<Main userLogout={userLogout} user={user}/>}/>
          <Route path={constRoutes.CARD} element={<CardPage/>}/>
          </Route>
-         <Route path={constRoutes.REGISTER} element={<RegisterPage userLogin={userLogin}/>}/>
+         <Route path={constRoutes.REGISTER} element={<RegisterPage authUser={authUser} userLogin={userLogin} navigate={navigate}/>}/>
          <Route path={constRoutes.LOGIN} element={<LoginPage userLogin={userLogin}/>}/> 
          <Route path={constRoutes.NOT_FOUND} element={<NotFoundPage/>}/>
         </Routes>

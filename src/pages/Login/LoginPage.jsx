@@ -2,31 +2,16 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { constRoutes } from "../../paths";
+import { useLogin } from "../hooks";
 import { loginUser } from "../../api";
 export const LoginPage = ({ userLogin }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
   const navigate = useNavigate
-
+  const {handleLogin, error} = useLogin(loginUser, userLogin, navigate)
   const handleUserLogin = async (e) => {
     e.preventDefault();
-    if (login === '' && password === '') {
-      setError('Укажите email и пароль')
-    } else if (login === '') {
-      setError('Укажите email')
-    } else if (password === '') {
-      setError('Укажите пароль')
-    } else {
-      try {
-        const response = await loginUser(login, password)
-        console.log( response.user)
-        userLogin(response.user)
-        navigate('/', { replace: true })
-      } catch (error) {
-        setError(error.message)
-      }
-    }
+     handleLogin(login, password)
             }
  
   return (
