@@ -13,20 +13,6 @@ export const Main = ({userLogout, user}) => {
   const show = true;
   const [isOpen, setIsOpen] = useState(false);
   const { cards, isLoading, getCardsError} = useFetchCards(user)
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [getCardsError, setGetCardsError] = useState(null);
-  // const [cards, setCards] = useState("");
-
-
-  //получение задач из api
-  // useEffect(() => {
-  // getCards({token: user.token}).then((cards)=> {
-  //   setCards(cards)
-  //   setIsLoading(false)
-  // }).catch((error)=>{setGetCardsError(error.message)}).finally(()=> {
-  //   setIsLoading(false)
-  // })
-  // }, [user])
 
   // Закрытие и открытие popUser
   const togglePopUser = () => {
@@ -48,7 +34,7 @@ export const Main = ({userLogout, user}) => {
      
       <PopNewCard />
       <PopBrowse />
-      <PopUser isOpen={isOpen} userLogout={userLogout}/>
+      <PopUser isOpen={isOpen} userLogout={userLogout} />
       <S.Main>
         <S.Container>
           <S.MainBlock>

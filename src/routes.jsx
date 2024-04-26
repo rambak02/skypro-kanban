@@ -8,6 +8,7 @@ import { CardPage } from './pages/CardPage/CardPage';
 import PrivateRoute from './PrivateRoute';
 import { useState } from 'react';
 import { authUser } from './api';
+import { UserContext } from './UserContext';
 
 export const AppRoutes = () => {
     // const [isAuth, setIsAuth] = useState(true)
@@ -26,6 +27,7 @@ function userLogout() {
   
     return (
         <>
+        <UserContext.Provider value={user}>
         <Routes>
         <Route element={<PrivateRoute/>}>
          <Route path={constRoutes.HOME} element={<Main userLogout={userLogout} user={user}/>}/>
@@ -35,6 +37,7 @@ function userLogout() {
          <Route path={constRoutes.LOGIN} element={<LoginPage userLogin={userLogin}/>}/> 
          <Route path={constRoutes.NOT_FOUND} element={<NotFoundPage/>}/>
         </Routes>
+        </UserContext.Provider>
         </>
     );
   }
