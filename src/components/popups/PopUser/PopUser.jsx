@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../../../UserContext";
-export const PopUser = ({ isOpen, userLogout }) => {
+import { useUserContext } from "../../../contexts/hooks/useUsers";
+
+export const PopUser = ({ isOpen }) => {
   const onSubmitPopUser = (e) => {
     e.preventDefault()
   }
-  const user = useUserContext();
+  const {user, userLogout} = useUserContext();
+
   return (
     isOpen && (
       <div className="header__pop-user-set pop-user-set" >
@@ -25,5 +27,4 @@ export const PopUser = ({ isOpen, userLogout }) => {
   )}
 PopUser.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  userLogout: PropTypes.func.isRequired,
 };

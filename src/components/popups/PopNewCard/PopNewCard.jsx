@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
 import { Calendar } from "../../Calendar/Calendar";
-export const PopNewCard = () => (
+import { constRoutes } from "../../../paths";
+export const PopNewCard = ({isOpenNewCard, closePopNewCard}) => {
+  return (
+isOpenNewCard && (
   <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">
       <div className="pop-new-card__block">
         <div className="pop-new-card__content">
           <h3 className="pop-new-card__ttl">Создание задачи</h3>
-          <a href="#" className="pop-new-card__close">
+         <Link to={constRoutes.HOME}><span onClick={closePopNewCard} className="pop-new-card__close">
             &#10006;
-          </a>
+          </span> </Link>
           <div className="pop-new-card__wrap">
             <form
               className="pop-new-card__form form-new"
@@ -61,5 +65,5 @@ export const PopNewCard = () => (
         </div>
       </div>
     </div>
-  </div>
-);
+  </div>))
+};

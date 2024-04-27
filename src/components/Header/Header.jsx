@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import * as S from "./Header.styled";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../../UserContext";
-export const Header = ({ onClick, addCard, show }) => {
-  const user = useUserContext()
+import { constRoutes } from "../../paths";
+import { useUserContext } from "../../contexts/hooks/useUsers";
+export const Header = ({ togglePopUser, togglePopNewCard, show, }) => {
+  const {user} = useUserContext()
   return(
   <S.Header>
     <S.Container>
@@ -19,11 +20,11 @@ export const Header = ({ onClick, addCard, show }) => {
           </Link>
         </S.HeaderLogo>
         <S.HeaderNav>
-          <S.HeaderBtnMainNew onClick={addCard} id="btnMainNew">
-            <S.HeaderLink href="#">Создать новую задачу</S.HeaderLink>
+          <S.HeaderBtnMainNew onClick={togglePopNewCard} id="btnMainNew">
+          <Link to={constRoutes.NEWCARD} target="_self"> <S.HeaderLink>Создать новую задачу</S.HeaderLink>   </Link> 
           </S.HeaderBtnMainNew>
           <S.HeaderUserLink
-            onClick={onClick}
+            onClick={togglePopUser}
           >
             {user.name}
           </S.HeaderUserLink>
@@ -34,7 +35,7 @@ export const Header = ({ onClick, addCard, show }) => {
   )
 };
 Header.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  addCard: PropTypes.func.isRequired,
+  togglePopUser: PropTypes.func.isRequired,
+  togglePopNewCard: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
 };

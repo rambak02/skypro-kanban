@@ -151,3 +151,8 @@ text-decoration: underline;
   cursor: pointer;
 }
 `;
+
+export const LoginError = styled.div`
+margin-top: 5px;
+color: #FA8072
+`

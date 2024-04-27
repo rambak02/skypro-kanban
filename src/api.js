@@ -11,26 +11,21 @@ export async function getCards({token}) {
 }
 
 export async function authUser(name, login, password) {
-  return await fetch(baseUrl + "/user", {
+  const response = await fetch(baseUrl + "/user", {
     method: "POST",
     body: JSON.stringify({
       name,
       login,
       password,
     }),
-  }).then((response) => {
-    if (response.status === 400) {
-      return response.json().then(() => {
-        throw new Error('Такой пользователь уже есть.')
-      })
+  });
+    if (!response.ok) {
+  const error = await response.json(); 
+  throw new Error(error.error)
     } else if (response.status === 201) {
       return response.json()
     }
-  })
-  .catch((error) => {
-    throw error
-  })
-}
+  }
 
 export async function loginUser(login, password) {
   return await fetch(baseUrl + "/user/login", {

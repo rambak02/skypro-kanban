@@ -156,3 +156,8 @@ letter-spacing: -0.14px;
 text-decoration: underline;
 }
 `;
+
+export const RegisterError = styled.div`
+margin-top: 5px;
+color: #FA8072
+`

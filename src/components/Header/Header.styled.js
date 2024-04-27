@@ -5,7 +5,7 @@ export const Header = styled.header`
   margin: 0 auto;
   background-color: #ffffff;
 `;
-export const HeaderLink = styled.a`
+export const HeaderLink = styled.span`
   color: #ffffff;
 `;
 export const HeaderUserLink = styled.a`

@@ -8,16 +8,27 @@ import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
 import PropTypes from "prop-types";
 import { useFetchCards } from "../hooks";
+import { useUserContext } from "../../contexts/hooks/useUsers";
 
-export const Main = ({userLogout, user}) => {
+export const Main = () => {
   const show = true;
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenNewCard, setisOpenNewCard] = useState(false)
+  const {user} = useUserContext();
   const { cards, isLoading, getCardsError} = useFetchCards(user)
 
   // Закрытие и открытие popUser
   const togglePopUser = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  const togglePopNewCard = () => {
+    setisOpenNewCard((prevState) => !prevState);
+  };
+
+  const closePopNewCard = () => {
+    setisOpenNewCard(false);
+  }
   // Добавление новой задачи
   function addCard() {
   }
@@ -26,15 +37,15 @@ export const Main = ({userLogout, user}) => {
  
   return (
     <>
-     <Header onClick={togglePopUser} addCard={addCard} show={show} />
+     <Header togglePopUser={togglePopUser} togglePopNewCard={togglePopNewCard} show={show} />
     {isLoading ?   <div>Данные загружаются...</div> : getCardsError ? (
     <div>{getCardsError}</div>
     ) : (
       <>
      
-      <PopNewCard />
+      <PopNewCard isOpenNewCard={isOpenNewCard} closePopNewCard={closePopNewCard}/>
       <PopBrowse />
-      <PopUser isOpen={isOpen} userLogout={userLogout} />
+      <PopUser isOpen={isOpen}  />
       <S.Main>
         <S.Container>
           <S.MainBlock>
@@ -54,8 +65,4 @@ export const Main = ({userLogout, user}) => {
     )}
     </>
   );
-};
-Main.propTypes = {
-  userLogout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
 };
