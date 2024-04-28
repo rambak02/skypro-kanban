@@ -80,5 +80,5 @@ export function useFetchCards(user) {
     fetchCards();
   }, [user]);
 
-  return { cards, isLoading, getCardsError };
+  return { cards, setCards, isLoading, getCardsError };
 }

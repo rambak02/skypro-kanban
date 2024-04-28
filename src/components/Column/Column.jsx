@@ -2,7 +2,8 @@ import { Card } from "../Card/Card";
 import PropTypes from "prop-types";
 import * as S from "./Column.styled";
 
-export const Column = ({ title, cards }) => (
+export const Column = ({ title, cards }) => {
+  return (
   <S.MainColumn>
     <S.ColumnTitle>
       <S.ColumnTitleText>{title}</S.ColumnTitleText>
@@ -18,8 +19,8 @@ export const Column = ({ title, cards }) => (
         />
       ))}
     </S.Cards>
-  </S.MainColumn>
-);
+  </S.MainColumn>)
+};
 Column.propTypes = {
   title: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,

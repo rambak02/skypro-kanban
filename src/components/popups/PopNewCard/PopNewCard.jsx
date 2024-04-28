@@ -1,9 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Calendar } from "../../Calendar/Calendar";
 import { constRoutes } from "../../../paths";
+import { postToDo } from "../../../api";
+import { useUserContext } from "../../../contexts/hooks/useUsers";
+import { useCardContext } from "../../../contexts/hooks/useCards";
+import { useState } from "react";
+import { useFetchCards } from "../../../pages/hooks";
 export const PopNewCard = ({isOpenNewCard, closePopNewCard}) => {
+  const [newCard, setNewCards] = useState({
+    title:'',
+    description:'',
+    topic: ''
+  })
+  const [selected, setSelected] = useState();
+  const { user } = useUserContext()
+  const { setCards} = useFetchCards()
+  const navigate = useNavigate()
+ const handleSubmit = async (event) => {
+  event.preventDefault();
+  const cardData = {... newCard, date: selected} 
+  postToDo({...cardData, token: user?.token }).then((responseData)=> {
+    console.log(responseData)
+    navigate(-1)
+    setCards(responseData)
+  }).catch(error => console.log(error.message))
+ }
   return (
-isOpenNewCard && (
   <div className="pop-new-card" id="popNewCard">
     <div className="pop-new-card__container">
       <div className="pop-new-card__block">
@@ -23,6 +45,7 @@ isOpenNewCard && (
                   Название задачи
                 </label>
                 <input
+                onChange={(e)=> setNewCards({...newCard, title:e.target.value})}
                   className="form-new__input"
                   type="text"
                   name="name"
@@ -36,6 +59,7 @@ isOpenNewCard && (
                   Описание задачи
                 </label>
                 <textarea
+                onChange={(e)=> setNewCards({...newCard, description:e.target.value})}
                   className="form-new__area"
                   name="text"
                   id="textArea"
@@ -43,12 +67,29 @@ isOpenNewCard && (
                 ></textarea>
               </div>
             </form>
-            <Calendar/>
+            <Calendar selected={selected} setSelected={setSelected}/>
           </div>
           <div className="pop-new-card__categories categories">
             <p className="categories__p subttl">Категория</p>
             <div className="categories__themes">
-              <div className="categories__theme _orange _active-category">
+              <label> Web Design
+              <input
+              onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
+             type= "radio" 
+             value="Web Design"
+              /></label> 
+                <label>Research Re<input
+                onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
+             type= "radio" 
+             value="Research"
+             checked
+              /></label>
+              <label>Copywriting<input
+             onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
+             type= "radio" 
+             value="Copywriting"
+              /></label>
+              {/* <div className="categories__theme _orange _active-category">
                 <p className="_orange">Web Design</p>
               </div>
               <div className="categories__theme _green">
@@ -56,14 +97,14 @@ isOpenNewCard && (
               </div>
               <div className="categories__theme _purple">
                 <p className="_purple">Copywriting</p>
-              </div>
+              </div> */}
             </div>
           </div>
-          <button className="form-new__create _hover01" id="btnCreate">
+          <button onClick={handleSubmit} className="form-new__create _hover01" id="btnCreate">
             Создать задачу
           </button>
         </div>
       </div>
     </div>
-  </div>))
+  </div>)
 };

@@ -6,9 +6,9 @@ import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "../../components/popups/PopUser/PopUser";
 import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
-import PropTypes from "prop-types";
 import { useFetchCards } from "../hooks";
 import { useUserContext } from "../../contexts/hooks/useUsers";
+import { Outlet } from "react-router-dom";
 
 export const Main = () => {
   const show = true;
@@ -30,9 +30,7 @@ export const Main = () => {
     setisOpenNewCard(false);
   }
   // Добавление новой задачи
-  function addCard() {
-  }
-
+ 
  
  
   return (
@@ -43,7 +41,6 @@ export const Main = () => {
     ) : (
       <>
      
-      <PopNewCard isOpenNewCard={isOpenNewCard} closePopNewCard={closePopNewCard}/>
       <PopBrowse />
       <PopUser isOpen={isOpen}  />
       <S.Main>
@@ -61,6 +58,7 @@ export const Main = () => {
           </S.MainBlock>
         </S.Container>
       </S.Main>
+      <Outlet />
     </>
     )}
     </>

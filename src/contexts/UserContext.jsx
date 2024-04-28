@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { constRoutes } from '../paths';
 
 
-export const UserContext = createContext(JSON.parse(localStorage.getItem("user")));
+export const UserContext = createContext(null);
 
 export function UserProvider({children}) {
-   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
+   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || false);
    const navigate = useNavigate();
 
    function userLogin(newUser) {

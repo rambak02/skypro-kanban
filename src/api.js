@@ -51,3 +51,24 @@ export async function loginUser(login, password) {
     throw error
   })
 }
+
+export async function postToDo({title, topic, description, date, token}) {
+const response = await fetch(baseUrl + "/kanban", {
+  method: "POST", 
+  body: JSON.stringify({
+    title,
+    topic,
+    description,
+    date
+  }),
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
+if (!response.ok) {
+  const error = await response.json(); 
+  throw new Error(error.error)
+    } else if (response.status === 201) {
+      return response.json()
+    }
+}

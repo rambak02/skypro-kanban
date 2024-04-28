@@ -12,14 +12,15 @@ export const AppRoutes = () => {
     return (
         <>
         <Routes>
+        <Route path={constRoutes.REGISTER} element={<RegisterPage />}/>
+         <Route path={constRoutes.LOGIN} element={<LoginPage />}/> 
         <Route element={<PrivateRoute/>}>
          <Route path={constRoutes.HOME} element={<Main />}>
          <Route path={constRoutes.CARD} element={<CardPage/>}/>
          <Route path={constRoutes.NEWCARD} element ={<NewCardPage/>}/>
          </Route>
-         </Route>
-         <Route path={constRoutes.REGISTER} element={<RegisterPage />}/>
-         <Route path={constRoutes.LOGIN} element={<LoginPage />}/> 
+     </Route>
+    
          <Route path={constRoutes.NOT_FOUND} element={<NotFoundPage/>}/>
         </Routes>
         </>
