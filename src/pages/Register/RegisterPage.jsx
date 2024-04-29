@@ -3,11 +3,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegistration } from "../hooks";
 import * as S from "./RegisterPage.styled";
-export const RegisterPage = ({ authUser, userLogin, navigate }) => {
+import { authUser } from "../../api";
+import { useUserContext } from "../../contexts/hooks/useUsers";
+
+
+export const RegisterPage = () => {
+ const {userLogin} = useUserContext();
   const { handleRegister, error } = useRegistration(
     authUser,
     userLogin,
-    navigate
   );
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +56,7 @@ export const RegisterPage = ({ authUser, userLogin, navigate }) => {
                 id="passwordFirst"
                 placeholder="Пароль"
               />
-              {error && <div>{error} </div>}
+              { error && <S.RegisterError>{error} </S.RegisterError>}
               <S.ButtonSignupEnt onClick={onSubmitForm} id="SignUpEnter">
                 Зарегистрироваться
               </S.ButtonSignupEnt>
@@ -73,8 +77,3 @@ export const RegisterPage = ({ authUser, userLogin, navigate }) => {
   );
 };
 
-RegisterPage.propTypes = {
-  authUser: PropTypes.func.isRequired,
-  userLogin: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired
-};

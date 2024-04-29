@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { getCards } from "../api";
+import { useNavigate } from "react-router-dom";
 
 //хук для регистрации
-export const useRegistration = (authUser, userLogin, navigate) => {
+export const useRegistration = (authUser, userLogin) => {
     const [error, setError] = useState('');
-    
+    const navigate = useNavigate();
     const handleRegister = async (name, login, password) => {
     try {
     if (login === '' && password === '' && name === '') {
     setError('Укажите имя, логин и пароль');
-    } else if (login === '') {
+    } if (login === '') {
     setError('Укажите login');
     } else if (password === '') {
     setError('Укажите пароль');
@@ -23,6 +24,7 @@ export const useRegistration = (authUser, userLogin, navigate) => {
     }
     } catch (error) {
     setError(error.message);
+    console.log(error.message)
     }
     };
     
@@ -78,5 +80,5 @@ export function useFetchCards(user) {
     fetchCards();
   }, [user]);
 
-  return { cards, isLoading, getCardsError };
+  return { cards, setCards, isLoading, getCardsError };
 }

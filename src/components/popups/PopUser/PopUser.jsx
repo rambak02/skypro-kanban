@@ -1,17 +1,24 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-export const PopUser = ({ isOpen, userLogout }) => {
+import { useUserContext } from "../../../contexts/hooks/useUsers";
+
+export const PopUser = ({ isOpen }) => {
+  const onSubmitPopUser = (e) => {
+    e.preventDefault()
+  }
+  const {user, userLogout} = useUserContext();
+
   return (
     isOpen && (
-      <div className="header__pop-user-set pop-user-set" id="user-set-target">
-        <p className="pop-user-set__name">Ivan Ivanov</p>
-        <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+      <div className="header__pop-user-set pop-user-set" >
+        <p className="pop-user-set__name">{user.name}</p>
+        <p className="pop-user-set__mail">{user.login}</p>
         <div className="pop-user-set__theme">
           <p>Темная тема</p>
           <input type="checkbox" className="checkbox" name="checkbox" />
         </div>
         <Link to='/login'>
-        <button onClick={userLogout}  type="button" className="_hover03">
+        <button onSubmit={onSubmitPopUser} onClick={userLogout}  type="button" className="_hover03">
           Выйти
         </button>
         </Link>
@@ -20,5 +27,4 @@ export const PopUser = ({ isOpen, userLogout }) => {
   )}
 PopUser.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  userLogout: PropTypes.func.isRequired,
 };

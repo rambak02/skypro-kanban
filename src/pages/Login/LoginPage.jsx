@@ -5,11 +5,14 @@ import { constRoutes } from "../../paths";
 import { useLogin } from "../hooks";
 import { loginUser } from "../../api";
 import * as S from "./LoginPage.styled";
-export const LoginPage = ({ userLogin }) => {
+import { useUserContext } from "../../contexts/hooks/useUsers";
+
+
+export const LoginPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate;
-  const { handleLogin, error } = useLogin(loginUser, userLogin, navigate);
+  const {userLogin} = useUserContext()
+  const { handleLogin, error } = useLogin(loginUser, userLogin);
   const handleUserLogin = async (e) => {
     e.preventDefault();
     handleLogin(login, password);
@@ -38,7 +41,7 @@ export const LoginPage = ({ userLogin }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Пароль"
               />
-              {error && <div>{error} </div>}
+              {error && <S.LoginError>{error} </S.LoginError>}
               <S.ButtonEnter id="btnEnter" onClick={handleUserLogin}>
                 Войти
               </S.ButtonEnter>
@@ -57,6 +60,4 @@ export const LoginPage = ({ userLogin }) => {
     </S.Wrapper>
   );
 };
-LoginPage.propTypes = {
-  userLogin: PropTypes.func.isRequired,
-};
+
