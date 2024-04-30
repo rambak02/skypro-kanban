@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import  {hover01}  from '../../../Styles/Common.styled'
+import { hover01 } from "../../../Styles/Common.styled";
 
 export const PopNewCard = styled.div`
   display: block;
@@ -11,31 +11,35 @@ export const PopNewCard = styled.div`
   top: 0;
   left: 0;
   z-index: 6;
+
+  @media (max-width: 660px) {
+    top: 70px;
+  }
 `;
 
 export const Subttl = styled.label`
-color: #000;
+  color: #000;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
-`
+`;
 export const PopNewCardCategories = styled.div`
-margin-bottom: 20px;
-`
+  margin-bottom: 20px;
+`;
 export const CategoriesThemes = styled.div`
- display: flex;
+  display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
-`
+`;
 export const CategoriesP = styled.p`
-margin-bottom: 14px;
-color: #000;
+  margin-bottom: 14px;
+  color: #000;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
-`
+`;
 
 export const PopNewCardContainer = styled.div`
   width: 100%;
@@ -47,11 +51,21 @@ export const PopNewCardContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
+  @media (max-width: 660px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
+  @media (max-width: 495px) {
+    .pop-new-card__container {
+      padding: 0;
+      justify-content: flex-start;
+    }
+  }
 `;
 
 export const Purple = styled.label`
-color: purple;
-font-size: 14px;
+  color: purple;
+  font-size: 14px;
   font-weight: 600;
   line-height: 14px;
   white-space: nowrap;
@@ -59,65 +73,62 @@ font-size: 14px;
   width: 120px;
   display: flex;
   align-items: center;
-    justify-content: center;
-    background-color:  ${props => props.$isSelected ? "#dfc1ff" : "#E9D4FF" };
-    border-radius: 20px;
-  &:hover{
-  background-color: #dfc1ff;
+  justify-content: center;
+  background-color: ${(props) => (props.$isSelected ? "#dfc1ff" : "#E9D4FF")};
+  border-radius: 20px;
+  &:hover {
+    background-color: #dfc1ff;
   }
-`
+`;
 
 export const Orange = styled.label`
-color: orange;
-font-size: 14px;
+  color: orange;
+  font-size: 14px;
   font-weight: 600;
   line-height: 14px;
   white-space: nowrap;
-  background-color: ${props => props.$isSelected ? "#FFE4C2" : "#ffedd7" };
+  background-color: ${(props) => (props.$isSelected ? "#FFE4C2" : "#ffedd7")};
   border-radius: 20px;
   height: 30px;
   width: 120px;
   display: flex;
   align-items: center;
-    justify-content: center;
+  justify-content: center;
 
-&:hover{
-background-color: #FFE4C2;
-}
-`
+  &:hover {
+    background-color: #ffe4c2;
+  }
+`;
 export const CategoriesTheme = styled.input`
- display: none;
+  display: none;
   width: auto;
   height: 30px;
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
   opacity: 0.4;
-`
-export const CategoriesThemeText = styled.div`
-
-`
+`;
+export const CategoriesThemeText = styled.div``;
 
 export const Green = styled.label`
-color: #0ac50a;
-font-size: 14px;
+  color: #0ac50a;
+  font-size: 14px;
   font-weight: 600;
   line-height: 14px;
   white-space: nowrap;
   height: 30px;
   width: 120px;
-  background-color: ${props => props.$isSelected ? "#B4FDD1" : "#cffae0" };
+  background-color: ${(props) => (props.$isSelected ? "#B4FDD1" : "#cffae0")};
   border-radius: 20px;
   display: flex;
   align-items: center;
-    justify-content: center;
+  justify-content: center;
 
-&:hover {
- background-color: #B4FDD1; 
- color: #12c712
-
-}
-`
+  &:hover {
+    background-color: #b4fdd1;
+    color: #12c712;
+  }
+`;
 
 export const PopNewCardBlock = styled.div`
   display: block;
@@ -129,6 +140,14 @@ export const PopNewCardBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid #d4dbe5;
   position: relative;
+  @media (max-width: 660px) {
+    border-radius: 0;
+  }
+  @media (max-width: 495px) {
+    .pop-new-card__block {
+      padding: 20px 16px 32px;
+    }
+  }
 `;
 
 export const PopNewCardContent = styled.div`
@@ -167,6 +186,13 @@ export const PopNewCardForm = styled.form`
   width: 100%;
   display: block;
   margin-bottom: 20px;
+  @media screen and (max-width: 495px) {
+    .pop-new-card__form {
+      max-width: 100%;
+      width: 100%;
+      display: block;
+    }
+  }
 `;
 
 export const FormNewBlock = styled.div`
@@ -232,6 +258,13 @@ export const FormNewArea = styled.textarea`
     color: #94a6be;
     letter-spacing: -0.14px;
   }
+
+  @media (max-width: 495px) {
+    .form-new__area {
+      max-width: 100%;
+      height: 34px;
+    }
+  }
 `;
 
 export const FormNewCreate = styled.button`
@@ -248,4 +281,11 @@ export const FormNewCreate = styled.button`
   float: right;
 
   ${hover01}
+
+  @media (max-width: 495px) {
+    .form-new__create {
+      width: 100%;
+      height: 40px;
+    }
+  }
 `;
