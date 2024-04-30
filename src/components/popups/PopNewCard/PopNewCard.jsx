@@ -4,107 +4,96 @@ import { constRoutes } from "../../../paths";
 import { postToDo } from "../../../api";
 import { useUserContext } from "../../../contexts/hooks/useUsers";
 import { useCardContext } from "../../../contexts/hooks/useCards";
+import * as S from "./PopNewCard.styled";
 import { useState } from "react";
-import { useFetchCards } from "../../../pages/hooks";
-export const PopNewCard = ({isOpenNewCard, closePopNewCard}) => {
+export const PopNewCard = () => {
   const [newCard, setNewCards] = useState({
     title:'',
     description:'',
-    topic: ''
+    topic: "Web Design"
   })
   const [selected, setSelected] = useState();
   const { user } = useUserContext()
-  const { setCards} = useFetchCards()
+  const { setCards} = useCardContext()
   const navigate = useNavigate()
  const handleSubmit = async (event) => {
   event.preventDefault();
   const cardData = {... newCard, date: selected} 
   postToDo({...cardData, token: user?.token }).then((responseData)=> {
-    console.log(responseData)
-    navigate(-1)
-    setCards(responseData)
+    setCards(responseData.tasks)
+    navigate(constRoutes.HOME)
   }).catch(error => console.log(error.message))
  }
   return (
-  <div className="pop-new-card" id="popNewCard">
-    <div className="pop-new-card__container">
-      <div className="pop-new-card__block">
-        <div className="pop-new-card__content">
-          <h3 className="pop-new-card__ttl">Создание задачи</h3>
-         <Link to={constRoutes.HOME}><span onClick={closePopNewCard} className="pop-new-card__close">
+  <S.PopNewCard>
+    <S.PopNewCardContainer>
+      <S.PopNewCardBlock>
+        <S.PopNewCardContent>
+          <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
+         <Link to={constRoutes.HOME}><S.PopNewCardClose>
             &#10006;
-          </span> </Link>
-          <div className="pop-new-card__wrap">
-            <form
-              className="pop-new-card__form form-new"
+          </S.PopNewCardClose> </Link>
+          <S.PopNewCardWrap>
+            <S.PopNewCardForm
               id="formNewCard"
               action="#"
             >
-              <div className="form-new__block">
-                <label htmlFor="formTitle" className="subttl">
+              <S.FormNewBlock>
+                <S.Subttl>
                   Название задачи
-                </label>
-                <input
+                </S.Subttl>
+                <S.FormNewInput
                 onChange={(e)=> setNewCards({...newCard, title:e.target.value})}
-                  className="form-new__input"
                   type="text"
-                  name="name"
                   id="formTitle"
                   placeholder="Введите название задачи..."
                   autoFocus
                 />
-              </div>
-              <div className="form-new__block">
-                <label htmlFor="textArea" className="subttl">
+              </S.FormNewBlock>
+              <S.FormNewBlock>
+                <S.Subttl>
                   Описание задачи
-                </label>
-                <textarea
+                </S.Subttl>
+                <S.FormNewArea
                 onChange={(e)=> setNewCards({...newCard, description:e.target.value})}
-                  className="form-new__area"
                   name="text"
                   id="textArea"
                   placeholder="Введите описание задачи..."
-                ></textarea>
-              </div>
-            </form>
+                ></S.FormNewArea>
+              </S.FormNewBlock>
+            </S.PopNewCardForm>
             <Calendar selected={selected} setSelected={setSelected}/>
-          </div>
-          <div className="pop-new-card__categories categories">
-            <p className="categories__p subttl">Категория</p>
-            <div className="categories__themes">
-              <label> Web Design
-              <input
+          </S.PopNewCardWrap>
+          <S.PopNewCardCategories>
+            <S.CategoriesP>Категория</S.CategoriesP>
+            <S.CategoriesThemes>
+              <S.Orange $isSelected={newCard.topic === "Web Design"}> <S.CategoriesThemeText>
+                Web Design</S.CategoriesThemeText>
+              <S.CategoriesTheme
               onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
-             type= "radio" 
+             type= "radio"
+             name="topic" 
              value="Web Design"
-              /></label> 
-                <label>Research Re<input
+              /></S.Orange> 
+                <S.Purple $isSelected={newCard.topic === "Research"}> <S.CategoriesThemeText>Research</S.CategoriesThemeText><S.CategoriesTheme
                 onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
              type= "radio" 
+             name="topic"
              value="Research"
-             checked
-              /></label>
-              <label>Copywriting<input
+              /></S.Purple>
+              <S.Green $isSelected={newCard.topic === "Copywriting"}>Copywriting<S.CategoriesTheme
              onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
+             name="topic"
              type= "radio" 
              value="Copywriting"
-              /></label>
-              {/* <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-              <div className="categories__theme _green">
-                <p className="_green">Research</p>
-              </div>
-              <div className="categories__theme _purple">
-                <p className="_purple">Copywriting</p>
-              </div> */}
-            </div>
-          </div>
-          <button onClick={handleSubmit} className="form-new__create _hover01" id="btnCreate">
+              /></S.Green>
+            </S.CategoriesThemes>
+          </S.PopNewCardCategories>
+          <S.FormNewCreate onClick={handleSubmit}id="btnCreate">
             Создать задачу
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>)
+          </S.FormNewCreate>
+        </S.PopNewCardContent>
+      </S.PopNewCardBlock>
+    </S.PopNewCardContainer>
+  </S.PopNewCard>)
 };
