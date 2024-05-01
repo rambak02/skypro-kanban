@@ -75,18 +75,18 @@ export const PopNewCard = () => {
              name="topic" 
              value="Web Design"
               /></S.Orange> 
-                <S.Purple $isSelected={newCard.topic === "Research"}> <S.CategoriesThemeText>Research</S.CategoriesThemeText><S.CategoriesTheme
+                <S.Green $isSelected={newCard.topic === "Research"}> <S.CategoriesThemeText>Research</S.CategoriesThemeText><S.CategoriesTheme
                 onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
              type= "radio" 
              name="topic"
              value="Research"
-              /></S.Purple>
-              <S.Green $isSelected={newCard.topic === "Copywriting"}>Copywriting<S.CategoriesTheme
+              /></S.Green>
+              <S.Purple $isSelected={newCard.topic === "Copywriting"}>Copywriting<S.CategoriesTheme
              onChange={(e)=> setNewCards({...newCard, topic:e.target.value})}
              name="topic"
              type= "radio" 
              value="Copywriting"
-              /></S.Green>
+              /></S.Purple>
             </S.CategoriesThemes>
           </S.PopNewCardCategories>
           <S.FormNewCreate onClick={handleSubmit}id="btnCreate">
