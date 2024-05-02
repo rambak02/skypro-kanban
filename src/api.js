@@ -72,3 +72,18 @@ if (!response.ok) {
       return response.json()
     }
 }
+
+export async function deleteTodo({id, token}) {
+  const response = await fetch(baseUrl + "/kanban" + id, {
+  method: "DELETE", 
+  headers: {
+    Authorization: `Bearer ${token}`,
+  }, 
+  })
+  if (!response.ok) {
+    const error = await response.json(); 
+    throw new Error(error.error)
+      } else if (response.status === 201) {
+        return response.json()
+      }
+}

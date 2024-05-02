@@ -1,91 +1,80 @@
+import { useCardContext } from "../../../contexts/hooks/useCards";
 import { Calendar } from "../../Calendar/Calendar";
+import * as S from "./PopBrowse.styled";
 
-export const PopBrowse = () => (
-  <div className="pop-browse" id="popBrowse">
-    <div className="pop-browse__container">
-      <div className="pop-browse__block">
-        <div className="pop-browse__content">
-          <div className="pop-browse__top-block">
-            <h3 className="pop-browse__ttl">Название задачи</h3>
-            <div className="categories__theme theme-top _orange _active-category">
-              <p className="_orange">Web Design</p>
-            </div>
-          </div>
-          <div className="pop-browse__status status">
-            <p className="status__p subttl">Статус</p>
-            <div className="status__themes">
-              <div className="status__theme _hide">
-                <p>Без статуса</p>
-              </div>
-              <div className="status__theme _gray">
-                <p className="_gray">Нужно сделать</p>
-              </div>
-              <div className="status__theme _hide">
-                <p>В работе</p>
-              </div>
-              <div className="status__theme _hide">
-                <p>Тестирование</p>
-              </div>
-              <div className="status__theme _hide">
-                <p>Готово</p>
-              </div>
-            </div>
-          </div>
-          <div className="pop-browse__wrap">
-            <form
-              className="pop-browse__form form-browse"
-              id="formBrowseCard"
-              action="#"
-            >
-              <div className="form-browse__block">
-                <label htmlFor="textArea01" className="subttl">
-                  Описание задачи
-                </label>
-                <textarea
-                  className="form-browse__area"
-                  name="text"
-                  id="textArea01"
-                  readOnly
-                  placeholder="Введите описание задачи..."
-                ></textarea>
-              </div>
-            </form>
-            <Calendar />
-          </div>
-          <div className="theme-down__categories theme-down">
-            <p className="categories__p subttl">Категория</p>
+export const PopBrowse = ({_id}) => {
+  const {cards} = useCardContext();
+ const newCards = cards.filter((card) => card._id === _id)
+ const [ card ] = newCards;
+
+  return (
+    <S.PopBrowse>
+      <S.PopBrowseContainer>
+        <S.PopBrowseBlock>
+          <S.PopBrowseContent>
+            <S.PopBrowseTopBlock>
+              <S.PopBrowseTtl>{card.title}</S.PopBrowseTtl>
+              <S.CategoriesThemeTopOrange>
+                <S.TopicTheme $topic={card.topic}>{card.topic}</S.TopicTheme>
+              </S.CategoriesThemeTopOrange>
+            </S.PopBrowseTopBlock>
+            <S.PopBrowseStatus>
+              <S.PopBrowseStatusText>Статус</S.PopBrowseStatusText>
+              <S.StatusThemes>
+                <S.StatusTheme>
+                  <S.StatusThemeText>Нужно сделать</S.StatusThemeText>
+                </S.StatusTheme>
+              </S.StatusThemes>
+            </S.PopBrowseStatus>
+            <S.PopBrowseWrap>
+              <S.PopBrowseForm>
+                <S.FormBrowseBlock>
+                  <S.Subttl>Описание задачи</S.Subttl>
+                  <S.FormBrowseArea
+                    name="text"
+                    id="textArea01"
+                    readOnly
+                    value={card.description}
+                    placeholder="Введите описание задачи..."
+                  ></S.FormBrowseArea>
+                </S.FormBrowseBlock>
+              </S.PopBrowseForm>
+              <S.PopBrowseCalendar>
+                <Calendar />
+              </S.PopBrowseCalendar>
+            </S.PopBrowseWrap>
+            {/* <S.CategoriesThemeDown>
+            <S.CategoriesText>Категория</S.CategoriesText>
             <div className="categories__theme _orange _active-category">
               <p className="_orange">Web Design</p>
             </div>
-          </div>
-          <div className="pop-browse__btn-browse ">
-            <div className="btn-group">
-              <button className="btn-browse__edit _btn-bor _hover03">
-                <a href="#">Редактировать задачу</a>
-              </button>
-            </div>
-          </div>
-          <div className="pop-browse__btn-edit _hide">
-            <div className="btn-group">
-              <button className="btn-edit__edit _btn-bg _hover01">
-                <a href="#">Сохранить</a>
-              </button>
-              <button className="btn-edit__edit _btn-bor _hover03">
-                <a href="#">Отменить</a>
-              </button>
-              <button
-                className="btn-edit__delete _btn-bor _hover03"
-                id="btnDelete"
-              >
-                <a href="#">Удалить задачу</a>
-              </button>
-            </div>
-            <button className="btn-edit__close _btn-bg _hover01">
-              <a href="#">Закрыть</a>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+          </S.CategoriesThemeDown> */}
+            <S.PopBrowseBtnBrowse>
+              <S.BtnGroup>
+                <S.BtnBtnBg>
+                  <S.BtnBorLink>Редактировать задачу</S.BtnBorLink>
+                </S.BtnBtnBg>
+              </S.BtnGroup>
+            </S.PopBrowseBtnBrowse>
+            <S.PopBrowseBtnEdit>
+              <S.BtnGroup>
+                <S.BtnEditBtnBg>
+                  <S.BtnEditLink>Сохранить</S.BtnEditLink>
+                </S.BtnEditBtnBg>
+                <S.BtnBtnBg>
+                  <S.BtnDeleteLink>Отменить</S.BtnDeleteLink>
+                </S.BtnBtnBg>
+                <S.BtnBtnBg id="btnDelete">
+                  <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
+                </S.BtnBtnBg>
+              </S.BtnGroup>
+              <S.BtnEditBtnBg>
+                <S.BtnEditLink>Закрыть</S.BtnEditLink>
+              </S.BtnEditBtnBg>
+            </S.PopBrowseBtnEdit>
+          </S.PopBrowseContent>
+        </S.PopBrowseBlock>
+      </S.PopBrowseContainer>
+    </S.PopBrowse>
+  );
+};
