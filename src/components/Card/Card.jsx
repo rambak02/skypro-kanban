@@ -17,7 +17,7 @@ export const Card = ({ topic, title, date, _id }) => {
  <S.CardItem>
   <S.CardsCard>
     <S.CardGroup>
-      <S.CardTheme>
+      <S.CardTheme $topic = {topic}>
         <S.TopicText>
             {topic}         
           </S.TopicText>

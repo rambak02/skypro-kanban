@@ -68,11 +68,10 @@ export const CardTheme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  background-color: ${({ $topicColor }) =>
-    topicStyles[$topicColor]?.backgroundColor || "#b4fdd1"};
+  background-color: ${(props) => (props.$topic === "Research" ? "#b4fdd1" : props.$topic ==="Copywriting" ?  "#E9D4FF" : "#FFE4C2" )};
 
   ${TopicText} {
-    color: ${({ $topicColor }) => topicStyles[$topicColor]?.color || "#06b16e"};
+    color: ${(props) => (props.$topic === "Research" ? 'green' : props.$topic ==="Copywriting" ? "purple" : "orange" )}
   }
 `;
 export const CardBtn = styled.div`
