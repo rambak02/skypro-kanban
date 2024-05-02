@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../../contexts/hooks/useUsers";
+import { constRoutes } from "../../../paths";
 
 export const PopUser = ({ isOpen }) => {
   const onSubmitPopUser = (e) => {
     e.preventDefault()
   }
-  const {user, userLogout} = useUserContext();
+  const {user } = useUserContext();
 
   return (
     isOpen && (
@@ -17,8 +18,8 @@ export const PopUser = ({ isOpen }) => {
           <p>Темная тема</p>
           <input type="checkbox" className="checkbox" name="checkbox" />
         </div>
-        <Link to='/login'>
-        <button onSubmit={onSubmitPopUser} onClick={userLogout}  type="button" className="_hover03">
+        <Link to={constRoutes.EXIT}>
+        <button onSubmit={onSubmitPopUser}  type="button" className="_hover03">
           Выйти
         </button>
         </Link>
