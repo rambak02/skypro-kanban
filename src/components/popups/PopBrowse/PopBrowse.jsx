@@ -6,6 +6,7 @@ import { constRoutes } from "../../../paths";
 import { Calendar } from "../../Calendar/Calendar";
 import * as S from "./PopBrowse.styled";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const PopBrowse = ({ _id }) => {
   const { cards, setCards } = useCardContext();
@@ -78,9 +79,10 @@ export const PopBrowse = ({ _id }) => {
                   <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
                 </S.BtnBtnBg>
               </S.BtnGroup>
-              <S.BtnEditBtnBg>
+             <Link to={constRoutes.HOME}> <S.BtnEditBtnBg>
                 <S.BtnEditLink>Закрыть</S.BtnEditLink>
               </S.BtnEditBtnBg>
+              </Link>
             </S.PopBrowseBtnEdit>
           </S.PopBrowseContent>
         </S.PopBrowseBlock>
