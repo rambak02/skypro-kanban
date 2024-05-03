@@ -74,7 +74,7 @@ if (!response.ok) {
 }
 
 export async function deleteTodo({id, token}) {
-  const response = await fetch(baseUrl + "/kanban" + id, {
+  const response = await fetch(baseUrl + "/kanban/" + id, {
   method: "DELETE", 
   headers: {
     Authorization: `Bearer ${token}`,

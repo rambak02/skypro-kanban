@@ -1,14 +1,28 @@
+import { useNavigate } from "react-router-dom";
+import { deleteTodo } from "../../../api";
 import { useCardContext } from "../../../contexts/hooks/useCards";
+import { useUserContext } from "../../../contexts/hooks/useUsers";
+import { constRoutes } from "../../../paths";
 import { Calendar } from "../../Calendar/Calendar";
 import * as S from "./PopBrowse.styled";
-import {useState} from "react"
+import { useState } from "react";
 
-export const PopBrowse = ({_id}) => {
-  const {cards} = useCardContext();
- const newCards = cards.filter((card) => card._id === _id)
- const [ card ] = newCards;
- console.log(card)
- const [selected, setSelected] = useState(card.date)
+export const PopBrowse = ({ _id }) => {
+  const { cards, setCards } = useCardContext();
+  const newCards = cards.filter((card) => card._id === _id);
+  const [card] = newCards;
+  const { user } = useUserContext();
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState(card.date);
+
+  const handleDeleteCards = async (event) => {
+    event.preventDefault();
+    deleteTodo({id: _id, token: user?.token }).then(
+    (responseData) => {
+      setCards(responseData.tasks);
+      navigate(constRoutes.HOME);
+    }).catch(error => console.log(error.message))
+  }
   return (
     <S.PopBrowse>
       <S.PopBrowseContainer>
@@ -42,7 +56,7 @@ export const PopBrowse = ({_id}) => {
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
               <S.PopBrowseCalendar>
-                <Calendar selected= {selected}  />
+                <Calendar selected={selected} />
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
             <S.PopBrowseBtnBrowse>
@@ -60,7 +74,7 @@ export const PopBrowse = ({_id}) => {
                 <S.BtnBtnBg>
                   <S.BtnDeleteLink>Отменить</S.BtnDeleteLink>
                 </S.BtnBtnBg>
-                <S.BtnBtnBg id="btnDelete">
+                <S.BtnBtnBg onClick={handleDeleteCards}>
                   <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
                 </S.BtnBtnBg>
               </S.BtnGroup>
