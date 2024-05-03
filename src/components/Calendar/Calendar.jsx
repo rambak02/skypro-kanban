@@ -4,9 +4,7 @@ import { ru } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { css } from './Calendar.styled';
-export const Calendar = ({selected, setSelected}) => {
-
-
+export const Calendar = ({ selected, setSelected}) => {
 
   let footer = <p>Выбкрите срок исполнения</p>;
   if (selected) {

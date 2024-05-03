@@ -1,12 +1,14 @@
 import { useCardContext } from "../../../contexts/hooks/useCards";
 import { Calendar } from "../../Calendar/Calendar";
 import * as S from "./PopBrowse.styled";
+import {useState} from "react"
 
 export const PopBrowse = ({_id}) => {
   const {cards} = useCardContext();
  const newCards = cards.filter((card) => card._id === _id)
  const [ card ] = newCards;
-
+ console.log(card)
+ const [selected, setSelected] = useState(card.date)
   return (
     <S.PopBrowse>
       <S.PopBrowseContainer>
@@ -40,15 +42,9 @@ export const PopBrowse = ({_id}) => {
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
               <S.PopBrowseCalendar>
-                <Calendar />
+                <Calendar selected= {selected}  />
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
-            {/* <S.CategoriesThemeDown>
-            <S.CategoriesText>Категория</S.CategoriesText>
-            <div className="categories__theme _orange _active-category">
-              <p className="_orange">Web Design</p>
-            </div>
-          </S.CategoriesThemeDown> */}
             <S.PopBrowseBtnBrowse>
               <S.BtnGroup>
                 <S.BtnBtnBg>
