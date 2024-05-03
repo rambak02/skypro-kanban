@@ -15,7 +15,7 @@ export const PopBrowse = ({ _id }) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const [selected, setSelected] = useState(card.date);
-
+  const date = new Date(selected);
   const handleDeleteCards = async (event) => {
     event.preventDefault();
     deleteTodo({id: _id, token: user?.token }).then(
@@ -57,7 +57,7 @@ export const PopBrowse = ({ _id }) => {
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
               <S.PopBrowseCalendar>
-                <Calendar selected={selected} />
+                <Calendar selected={date} />
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
             <S.PopBrowseBtnBrowse>
