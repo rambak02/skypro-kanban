@@ -123,18 +123,17 @@ export const StatusThemes = styled.div`
 export const StatusTheme = styled.div`
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  color: #94a6be;
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
-  background-color: "#94a6be";
-  color: "#ffffff";
+  background-color: #94a6be;
+  color: #ffffff;
 `;
 export const StatusThemeText = styled.div`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-  color: "#ffffff";
+  color: #ffffff;
 `;
 export const PopBrowseWrap = styled.div`
   display: flex;
@@ -194,6 +193,11 @@ export const FormBrowseArea = styled.textarea`
     color: #94a6be;
     letter-spacing: -0.14px;
   }
+
+  @media (max-width: 495px) {
+    height: 37px;
+    max-width: 100%;
+  }
 `;
 
 export const CategoriesThemeDown = styled.div`
@@ -237,6 +241,10 @@ export const BtnEditBtnBg = styled.button`
   padding: 0 14px;
 
   ${hover03}
+
+  @media (max-width: 495px) {
+    margin-right: 0px;
+  }
 `;
 export const BtnBtnBg = styled.button`
   margin-right: 8px;

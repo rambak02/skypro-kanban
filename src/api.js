@@ -87,3 +87,24 @@ export async function deleteTodo({id, token}) {
         return response.json()
       }
 }
+
+export async function editToDo({id, token, title, topic, description, date}) {
+  const response = await fetch(baseUrl + "/kanban/" + id, {
+   method: "PUT", 
+   body: JSON.stringify({
+    title,
+    topic,
+    description,
+    date
+  }),
+   headers: {
+    Authorization: `Bearer ${token}`,
+  },
+  })
+  if (!response.ok) {
+    const error = await response.json(); 
+    throw new Error(error.error)
+      } else if (response.status === 201) {
+        return response.json()
+      }
+}

@@ -39,7 +39,7 @@ export const PopBrowse = ({ _id }) => {
               <S.PopBrowseStatusText>Статус</S.PopBrowseStatusText>
               <S.StatusThemes>
                 <S.StatusTheme>
-                  <S.StatusThemeText>Нужно сделать</S.StatusThemeText>
+                  <S.StatusThemeText>{card.status}</S.StatusThemeText>
                 </S.StatusTheme>
               </S.StatusThemes>
             </S.PopBrowseStatus>
