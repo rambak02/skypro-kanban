@@ -120,6 +120,19 @@ export const StatusThemes = styled.div`
   justify-content: flex-start;
 `;
 
+export const StatusThemeEdit = styled.label`
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  background-color: ${(props) => (props.$isSelected ? "#94a6be" : "#ffffff")} ;
+  color: ${(props) => (props.$isSelected ?  "#ffffff" : "#94a6be")} ;
+`;
+export const StatusEditInput = styled.input`
+display:none;
+`
+
 export const StatusTheme = styled.div`
   border-radius: 24px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
@@ -133,7 +146,6 @@ export const StatusThemeText = styled.div`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-  color: #ffffff;
 `;
 export const PopBrowseWrap = styled.div`
   display: flex;

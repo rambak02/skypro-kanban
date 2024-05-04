@@ -88,12 +88,13 @@ export async function deleteTodo({id, token}) {
       }
 }
 
-export async function editToDo({id, token, title, topic, description, date}) {
+export async function editToDo({id, token, status, title, topic, description, date}) {
   const response = await fetch(baseUrl + "/kanban/" + id, {
    method: "PUT", 
    body: JSON.stringify({
     title,
     topic,
+    status,
     description,
     date
   }),
