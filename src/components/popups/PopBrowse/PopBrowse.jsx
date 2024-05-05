@@ -25,7 +25,13 @@ export const PopBrowse = ({ _id }) => {
     description: card.description,
     date: new Date(selected),
   });
-
+  const statusOptions = [
+    { value: "Без статуса", label: "Без статуса" },
+    { value: "Нужно сделать", label: "Нужно сделать" },
+    { value: "В работе", label: "В работе" },
+    { value: "Тестирование", label: "Тестирование" },
+    { value: "Готово", label: "Готово" },
+  ];
   useEffect(() => {
     setEditCard((prevEditCard) => ({
       ...prevEditCard,
@@ -67,81 +73,35 @@ export const PopBrowse = ({ _id }) => {
   const handleCancelEditCard = () => {
     setEdit(false);
   };
-  return edit ? (
-    <S.PopBrowse>
-      <S.PopBrowseContainer>
-        <S.PopBrowseBlock>
-          <S.PopBrowseContent>
-            <S.PopBrowseTopBlock>
-              <S.PopBrowseTtl>{card.title}</S.PopBrowseTtl>
-              <S.CategoriesThemeTopOrange>
-                <S.TopicTheme $topic={card.topic}>{card.topic}</S.TopicTheme>
-              </S.CategoriesThemeTopOrange>
-            </S.PopBrowseTopBlock>
+  return <S.PopBrowse>
+  <S.PopBrowseContainer>
+    <S.PopBrowseBlock>
+      <S.PopBrowseContent>
+        <S.PopBrowseTopBlock>
+          <S.PopBrowseTtl>{card.title}</S.PopBrowseTtl>
+          <S.CategoriesThemeTopOrange>
+            <S.TopicTheme $topic={card.topic}>{card.topic}</S.TopicTheme>
+          </S.CategoriesThemeTopOrange>
+        </S.PopBrowseTopBlock>
+        {edit ? (
+          <>
             <S.PopBrowseStatus>
               <S.PopBrowseStatusText>Статус</S.PopBrowseStatusText>
               <S.StatusThemes>
-                <S.StatusThemeEdit
-                  $isSelected={editCard.status === "Без статуса"}
-                >
-                  <S.StatusThemeText>Без статуса</S.StatusThemeText>
-                  <S.StatusEditInput
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, status: e.target.value })
-                    }
-                    type="radio"
-                    name="status"
-                    value="Без статуса"
-                  />
-                </S.StatusThemeEdit>
-                <S.StatusThemeEdit
-                  $isSelected={editCard.status === "Нужно сделать"}
-                >
-                  <S.StatusThemeText>Нужно сделать</S.StatusThemeText>
-                  <S.StatusEditInput
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, status: e.target.value })
-                    }
-                    type="radio"
-                    name="status"
-                    value="Нужно сделать"
-                  />
-                </S.StatusThemeEdit>
-                <S.StatusThemeEdit $isSelected={editCard.status === "В работе"}>
-                  <S.StatusThemeText>В работе</S.StatusThemeText>
-                  <S.StatusEditInput
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, status: e.target.value })
-                    }
-                    type="radio"
-                    name="status"
-                    value="В работе"
-                  />
-                </S.StatusThemeEdit>
-                <S.StatusThemeEdit
-                  $isSelected={editCard.status === "Тестирование"}
-                >
-                  <S.StatusThemeText>Тестирование</S.StatusThemeText>
-                  <S.StatusEditInput
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, status: e.target.value })
-                    }
-                    type="radio"
-                    name="status"
-                    value="Тестирование"
-                  />
-                </S.StatusThemeEdit>
-                <S.StatusThemeEdit $isSelected={editCard.status === "Готово"}>
-                  <S.StatusThemeText>Готово</S.StatusThemeText>
-                  <S.StatusEditInput
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, status: e.target.value })
-                    }
-                    type="radio"
-                    name="status"
-                    value="Готово"
-                  />
-                </S.StatusThemeEdit>
+                {statusOptions.map(option => (
+                  <S.StatusThemeEdit
+                    key={option.value}
+                    $isSelected={editCard.status === option.value}
+                  >
+                    <S.StatusThemeText>{option.label}</S.StatusThemeText>
+                    <S.StatusEditInput
+                      onChange={(e) => setEditCard({ ...editCard, status: e.target.value })}
+                      type="radio"
+                      name="status"
+                      value={option.value}
+                    />
+                  </S.StatusThemeEdit>
+                ))}
               </S.StatusThemes>
             </S.PopBrowseStatus>
             <S.PopBrowseWrap>
@@ -152,9 +112,7 @@ export const PopBrowse = ({ _id }) => {
                     name="text"
                     id="textArea01"
                     value={editCard.description}
-                    onChange={(e) =>
-                      setEditCard({ ...editCard, description: e.target.value })
-                    }
+                    onChange={(e) => setEditCard({ ...editCard, description: e.target.value })}
                     placeholder="Введите описание задачи..."
                   ></S.FormBrowseAreaEdit>
                 </S.FormBrowseBlock>
@@ -164,40 +122,9 @@ export const PopBrowse = ({ _id }) => {
                 <Calendar selected={selected} setSelected={setSelected} />
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
-            <S.PopBrowseBtnEdit>
-              <S.BtnGroup>
-                <S.BtnEditBtnBg onClick={handleEditCards}>
-                  <S.BtnEditLink>Сохранить</S.BtnEditLink>
-                </S.BtnEditBtnBg>
-                <S.BtnBtnBg onClick={handleCancelEditCard}>
-                  <S.BtnDeleteLink>Отменить</S.BtnDeleteLink>
-                </S.BtnBtnBg>
-                <S.BtnBtnBg onClick={handleDeleteCards}>
-                  <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
-                </S.BtnBtnBg>
-              </S.BtnGroup>
-              <Link to={constRoutes.HOME}>
-                {" "}
-                <S.BtnEditBtnBg>
-                  <S.BtnEditLink>Закрыть</S.BtnEditLink>
-                </S.BtnEditBtnBg>
-              </Link>
-            </S.PopBrowseBtnEdit>
-          </S.PopBrowseContent>
-        </S.PopBrowseBlock>
-      </S.PopBrowseContainer>
-    </S.PopBrowse>
-  ) : (
-    <S.PopBrowse>
-      <S.PopBrowseContainer>
-        <S.PopBrowseBlock>
-          <S.PopBrowseContent>
-            <S.PopBrowseTopBlock>
-              <S.PopBrowseTtl>{card.title}</S.PopBrowseTtl>
-              <S.CategoriesThemeTopOrange>
-                <S.TopicTheme $topic={card.topic}>{card.topic}</S.TopicTheme>
-              </S.CategoriesThemeTopOrange>
-            </S.PopBrowseTopBlock>
+          </>
+        ) : (
+          <>
             <S.PopBrowseStatus>
               <S.PopBrowseStatusText>Статус</S.PopBrowseStatusText>
               <S.StatusThemes>
@@ -223,28 +150,40 @@ export const PopBrowse = ({ _id }) => {
                 <Calendar selected={selected} />
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
-            <S.PopBrowseBtnBrowse></S.PopBrowseBtnBrowse>
-            <S.PopBrowseBtnEdit>
-              <S.BtnGroup>
+          </>
+        )}
+        <S.PopBrowseBtnEdit>
+          <S.BtnGroup>
+            {edit ? (
+              <>
+                <S.BtnEditBtnBg onClick={handleEditCards}>
+                  <S.BtnEditLink>Сохранить</S.BtnEditLink>
+                </S.BtnEditBtnBg>
+                <S.BtnBtnBg onClick={handleCancelEditCard}>
+                  <S.BtnDeleteLink>Отменить</S.BtnDeleteLink>
+                </S.BtnBtnBg>
+              </>
+            ) : (
+              <>
                 <S.BtnBtnBg onClick={handleEditCard}>
                   <S.BtnBorLink>Редактировать задачу</S.BtnBorLink>
                 </S.BtnBtnBg>
                 <S.BtnBtnBg onClick={handleDeleteCards}>
                   <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
                 </S.BtnBtnBg>
-              </S.BtnGroup>
-              <Link to={constRoutes.HOME}>
-                {" "}
-                <S.BtnEditBtnBg>
-                  <S.BtnEditLink>Закрыть</S.BtnEditLink>
-                </S.BtnEditBtnBg>
-              </Link>
-            </S.PopBrowseBtnEdit>
-          </S.PopBrowseContent>
-        </S.PopBrowseBlock>
-      </S.PopBrowseContainer>
-    </S.PopBrowse>
-  );
+              </>
+            )}
+            <Link to={constRoutes.HOME}>
+              <S.BtnEditBtnBg>
+                <S.BtnEditLink>Закрыть</S.BtnEditLink>
+              </S.BtnEditBtnBg>
+            </Link>
+          </S.BtnGroup>
+        </S.PopBrowseBtnEdit>
+      </S.PopBrowseContent>
+    </S.PopBrowseBlock>
+  </S.PopBrowseContainer>
+</S.PopBrowse>
 };
 PopBrowse.propTypes = {
   _id: PropTypes.string.isRequired
