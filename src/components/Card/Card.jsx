@@ -22,13 +22,13 @@ export const Card = ({ topic, title, date, _id }) => {
             {topic}         
           </S.TopicText>
         </S.CardTheme>
-        <a href="#popBrowse" target="_self">
+        <Link to = {cardLink}>
           <S.CardBtn>
           <S.CardBtnDetail> </S.CardBtnDetail>
           <S.CardBtnDetail> </S.CardBtnDetail>
           <S.CardBtnDetail> </S.CardBtnDetail>
           </S.CardBtn>
-        </a>
+        </Link>
       </S.CardGroup>
       <S.CardContent>
       <Link to={cardLink}>

@@ -13,6 +13,7 @@ export const PopBrowse = styled.div`
 
   @media (max-width: 660px) {
     top: 70px;
+    position: absolute
   }
 `;
 
@@ -189,6 +190,7 @@ export const FormBrowseArea = styled.textarea`
   letter-spacing: -0.14px;
   margin-top: 14px;
   height: 200px;
+  resize: none; 
 
   &::-moz-placeholder {
     font-weight: 400;
@@ -211,6 +213,10 @@ export const FormBrowseArea = styled.textarea`
     max-width: 100%;
   }
 `;
+
+export const FormBrowseAreaEdit = styled(FormBrowseArea)`
+  background: #fff;
+`
 
 export const CategoriesThemeDown = styled.div`
   display: none;
@@ -283,3 +289,12 @@ export const PopBrowseCalendar = styled.div`
     width: 100%;
   }
 `;
+
+export const Error = styled.div`
+display: flex;
+ font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #dd5d5d;
+  margin-top: 5px
+`

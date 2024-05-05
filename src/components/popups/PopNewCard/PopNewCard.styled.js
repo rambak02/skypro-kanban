@@ -289,3 +289,12 @@ export const FormNewCreate = styled.button`
     }
   }
 `;
+
+export const Error = styled.div`
+display: flex;
+ font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #dd5d5d;
+  margin-top: 5px
+`

@@ -12,6 +12,7 @@ export const PopBrowse = ({ _id }) => {
   const { cards, setCards } = useCardContext();
   const newCards = cards.filter((card) => card._id === _id);
   const [card] = newCards;
+  const [error, setError] = useState();
   const [selected, setSelected] = useState(new Date(card.date));
   const [edit, setEdit] = useState(false);
   const [editCard, setEditCard] = useState({ 
@@ -31,6 +32,7 @@ export const PopBrowse = ({ _id }) => {
   const navigate = useNavigate();
   const handleDeleteCards = async (event) => {
     event.preventDefault();
+
     deleteTodo({id: _id, token: user?.token }).then(
     (responseData) => {
       setEdit(false);
@@ -40,6 +42,12 @@ export const PopBrowse = ({ _id }) => {
   }
   const handleEditCards = async (event) => {
     event.preventDefault();
+
+    if (!editCard.description.trim()) {
+      setError("Введите описание задачи");
+      return
+    }
+
     const cardData = {...editCard}
     editToDo({ id: _id, ...cardData, token: user?.token}).then((responseData)=> {
       setCards(responseData.tasks)
@@ -113,14 +121,15 @@ export const PopBrowse = ({ _id }) => {
           <S.PopBrowseForm>
             <S.FormBrowseBlock>
               <S.Subttl>Описание задачи</S.Subttl>
-              <S.FormBrowseArea
+              <S.FormBrowseAreaEdit
                 name="text"
                 id="textArea01"
                 value={editCard.description}
                 onChange={(e)=> setEditCard({...editCard, description:e.target.value})}
                 placeholder="Введите описание задачи..."
-              ></S.FormBrowseArea>
+              ></S.FormBrowseAreaEdit>
             </S.FormBrowseBlock>
+            {error && <S.Error>{error}</S.Error>}
           </S.PopBrowseForm>
           <S.PopBrowseCalendar>
             <Calendar selected={selected} setSelected={setSelected} />
@@ -187,14 +196,12 @@ export const PopBrowse = ({ _id }) => {
               </S.PopBrowseCalendar>
             </S.PopBrowseWrap>
             <S.PopBrowseBtnBrowse>
-              <S.BtnGroup>
-                <S.BtnBtnBg onClick = {handleEditCard}>
-                  <S.BtnBorLink>Редактировать задачу</S.BtnBorLink>
-                </S.BtnBtnBg>
-              </S.BtnGroup>
             </S.PopBrowseBtnBrowse>
             <S.PopBrowseBtnEdit>
-              <S.BtnGroup>
+              <S.BtnGroup> 
+              <S.BtnBtnBg onClick = {handleEditCard}>
+                  <S.BtnBorLink>Редактировать задачу</S.BtnBorLink>
+                </S.BtnBtnBg>
                 <S.BtnBtnBg onClick={handleDeleteCards}>
                   <S.BtnDeleteLink>Удалить задачу</S.BtnDeleteLink>
                 </S.BtnBtnBg>

@@ -9,15 +9,22 @@ import { useState } from "react";
 export const PopNewCard = () => {
   const [newCard, setNewCards] = useState({
     title:'',
-    description:'',
+    description:' ',
     topic: "Web Design"
   })
   const [selected, setSelected] = useState();
   const { user } = useUserContext()
   const { setCards} = useCardContext()
+  const [error, setError] = useState();
   const navigate = useNavigate()
  const handleSubmit = async (event) => {
   event.preventDefault();
+
+  if (!newCard.title.trim()) {
+    setError("Введите название задачи");
+    return
+  }
+
   const cardData = {... newCard, date: selected} 
   postToDo({...cardData, token: user?.token }).then((responseData)=> {
     setCards(responseData.tasks)
@@ -61,6 +68,7 @@ export const PopNewCard = () => {
                   placeholder="Введите описание задачи..."
                 ></S.FormNewArea>
               </S.FormNewBlock>
+              {error && <S.Error>{error}</S.Error>}
             </S.PopNewCardForm>
             <Calendar selected={selected} setSelected={setSelected}/>
           </S.PopNewCardWrap>
@@ -89,6 +97,7 @@ export const PopNewCard = () => {
               /></S.Purple>
             </S.CategoriesThemes>
           </S.PopNewCardCategories>
+       
           <S.FormNewCreate onClick={handleSubmit}id="btnCreate">
             Создать задачу
           </S.FormNewCreate>
