@@ -12,14 +12,19 @@ export const PopNewCard = () => {
     description:' ',
     topic: "Web Design"
   })
+
+  //Выбранная дата в календаре
   const [selected, setSelected] = useState();
   const { user } = useUserContext()
   const { setCards} = useCardContext()
   const [error, setError] = useState();
   const navigate = useNavigate()
+  
+  //ф-ия создания новой задачи
  const handleSubmit = async (event) => {
   event.preventDefault();
 
+  //проверяем есть ли название задачи
   if (!newCard.title.trim()) {
     setError("Введите название задачи");
     return

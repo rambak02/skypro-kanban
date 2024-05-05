@@ -16,11 +16,6 @@ export const Main = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  
-  // Добавление новой задачи
- 
- 
- 
   return (
     <>
      <Header togglePopUser={togglePopUser} show={show} />
