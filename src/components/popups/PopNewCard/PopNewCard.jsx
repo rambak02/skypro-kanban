@@ -7,11 +7,14 @@ import { useCardContext } from "../../../contexts/hooks/useCards";
 import * as S from "./PopNewCard.styled";
 import { useState } from "react";
 export const PopNewCard = () => {
+
+
   const [newCard, setNewCards] = useState({
     title:'',
     description:' ',
     topic: "Web Design"
   })
+
 
   //Выбранная дата в календаре
   const [selected, setSelected] = useState();
@@ -20,9 +23,11 @@ export const PopNewCard = () => {
   const [error, setError] = useState();
   const navigate = useNavigate()
   
+
   //ф-ия создания новой задачи
  const handleSubmit = async (event) => {
   event.preventDefault();
+
 
   //проверяем есть ли название задачи
   if (!newCard.title.trim()) {
@@ -35,7 +40,9 @@ export const PopNewCard = () => {
     setCards(responseData.tasks)
     navigate(constRoutes.HOME)
   }).catch(error => console.log(error.message))
- }
+ 
+
+}
   return (
   <S.PopNewCard>
     <S.PopNewCardContainer>
