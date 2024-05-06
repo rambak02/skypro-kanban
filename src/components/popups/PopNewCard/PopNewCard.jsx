@@ -7,23 +7,42 @@ import { useCardContext } from "../../../contexts/hooks/useCards";
 import * as S from "./PopNewCard.styled";
 import { useState } from "react";
 export const PopNewCard = () => {
+
+
   const [newCard, setNewCards] = useState({
     title:'',
-    description:'',
+    description:' ',
     topic: "Web Design"
   })
+
+
+  //Выбранная дата в календаре
   const [selected, setSelected] = useState();
   const { user } = useUserContext()
   const { setCards} = useCardContext()
+  const [error, setError] = useState();
   const navigate = useNavigate()
+  
+
+  //ф-ия создания новой задачи
  const handleSubmit = async (event) => {
   event.preventDefault();
+
+
+  //проверяем есть ли название задачи
+  if (!newCard.title.trim()) {
+    setError("Введите название задачи");
+    return
+  }
+
   const cardData = {... newCard, date: selected} 
   postToDo({...cardData, token: user?.token }).then((responseData)=> {
     setCards(responseData.tasks)
     navigate(constRoutes.HOME)
   }).catch(error => console.log(error.message))
- }
+ 
+
+}
   return (
   <S.PopNewCard>
     <S.PopNewCardContainer>
@@ -61,6 +80,7 @@ export const PopNewCard = () => {
                   placeholder="Введите описание задачи..."
                 ></S.FormNewArea>
               </S.FormNewBlock>
+              {error && <S.Error>{error}</S.Error>}
             </S.PopNewCardForm>
             <Calendar selected={selected} setSelected={setSelected}/>
           </S.PopNewCardWrap>
@@ -89,6 +109,7 @@ export const PopNewCard = () => {
               /></S.Purple>
             </S.CategoriesThemes>
           </S.PopNewCardCategories>
+       
           <S.FormNewCreate onClick={handleSubmit}id="btnCreate">
             Создать задачу
           </S.FormNewCreate>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Column } from "../../components/Column/Column";
 import { columnList } from "../../data";
-import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 import { PopUser } from "../../components/popups/PopUser/PopUser";
 import * as S from "./Main.styled";
 import { Header } from "../../components/Header/Header";
@@ -17,11 +16,6 @@ export const Main = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  
-  // Добавление новой задачи
- 
- 
- 
   return (
     <>
      <Header togglePopUser={togglePopUser} show={show} />
@@ -30,7 +24,6 @@ export const Main = () => {
     ) : (
       <>
      
-      <PopBrowse />
       <PopUser isOpen={isOpen}  />
       <S.Main>
         <S.Container>

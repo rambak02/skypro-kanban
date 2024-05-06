@@ -1,7 +1,7 @@
 export const css = `
 .my-selected:not([disabled]) { 
   font-weight: bold; 
-  background-color: gray;
+  background-color: gray; 
   color: white
 }
 .my-selected:hover:not([disabled]) { 
@@ -13,4 +13,5 @@ export const css = `
   font-size: 140%; 
   color: #736d6d;
 }
+
 `;

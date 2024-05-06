@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { PopBrowse } from "../../components/popups/PopBrowse/PopBrowse";
 
 export const CardPage = () => {
   let { cardId } = useParams();
 
-  return <div>Страница карты с ID: {cardId}</div>;
-}
-
+  return <PopBrowse _id={cardId}/>;
+};

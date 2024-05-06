@@ -7,6 +7,8 @@ import { constRoutes } from './paths';
 import { CardPage } from './pages/CardPage/CardPage';
 import PrivateRoute from './PrivateRoute';
 import { NewCardPage } from './pages/NewCardPage/NewCardPage';
+import { ExitPage } from './pages/ExitPage/ExitPage';
+
 
 export const AppRoutes = () => {
     return (
@@ -16,6 +18,7 @@ export const AppRoutes = () => {
          <Route path={constRoutes.LOGIN} element={<LoginPage />}/> 
         <Route element={<PrivateRoute/>}>
          <Route path={constRoutes.HOME} element={<Main />}>
+        <Route path={constRoutes.EXIT} element={<ExitPage />}/>
          <Route path={constRoutes.CARD} element={<CardPage/>}/>
          <Route path={constRoutes.NEWCARD} element ={<NewCardPage/>}/>
          </Route>
